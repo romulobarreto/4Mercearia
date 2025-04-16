@@ -13,7 +13,7 @@ def menu():
         if opcao == "1":
             print("\n📌Menu de CATEGORIA: ")
             print("1️⃣ - Cadastrar Categoria")
-            print("2️⃣ - Listar Categorias")
+            print("2️⃣ - Detalhar Categorias")
             print("3️⃣ - Editar Categoria")
             print("4️⃣ - Excluir Categoria")
             print("5️⃣ - Voltar")
@@ -22,12 +22,13 @@ def menu():
 
             if opcao_categoria == "1":
                 CategoriaView.cadastrar_categoria()
-            #elif opcao_categoria == "2":
-                #TODO Fazer a view e controller que lista as categorias com os detalhes
+            elif opcao_categoria == "2":
+                CategoriaView.detalhar_categorias()
             #elif opcao_categoria == "3":
                 #TODO Fazer a view e controller que edita a categoria
-            #elif opcao_categoria == "4":
-                #TODO Fazer a view e controller que exclui a categoria caso não esteja em uso
+            elif opcao_categoria == "4":
+                CategoriaView.detalhar_categorias()
+                CategoriaView.excluir_categoria()
             elif opcao_categoria == "5":
                 continue
             else:
