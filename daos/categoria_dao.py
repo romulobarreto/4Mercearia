@@ -20,6 +20,6 @@ class CategoriaDao:
         try:
             with open(cls.caminho_arquivo, "w") as arq:
                 json.dump(categorias, arq, indent=4)
-                return True, "✅ Dados salvos com sucesso."
+                return True, "\n✅ Dados salvos com sucesso."
         except Exception as e:
             return False, "❌ Dados não salvos por erro, favor, validar."
