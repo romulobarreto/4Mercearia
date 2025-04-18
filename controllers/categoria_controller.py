@@ -87,3 +87,33 @@ class CategoriaController:
         CategoriaDao.salvar_categoria(categorias)
         return True, f"✅ A categoria {nome} foi deletada com sucesso."
         
+
+
+    @staticmethod
+    def editar_categoria(nome, novo_nome):
+        # Carrega lista de usuários
+        categorias = CategoriaDao.carregar_categoria()
+
+        # Valida o nome da categoria
+        if not novo_nome:
+            return False, f"✅ A categoria {nome.upper()} permanece a mesma."
+        
+        # Valida se o nome da categoria está cadastrado
+        for categoria in categorias:
+            if categoria["nome"] == novo_nome:
+                return False, f"⚠️ {novo_nome.upper()} já está em uso."
+            
+        # Encontra a lista que deve ser editado e faz a alteração
+        for categoria in categorias:
+            if categoria["nome"] == nome:
+                categoria["nome"] = novo_nome
+                break
+
+        # Salva a lista editada no banco
+        sucesso, mensagem = CategoriaDao.salvar_categoria(categorias)
+
+        # Mostra a mensagem de sucesso
+        if sucesso:
+            return True, f"{mensagem}\nCategoria antiga:{nome.upper()}\nCategoria nova: {novo_nome.upper()}"
+        else:
+            return False, mensagem
