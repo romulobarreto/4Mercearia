@@ -24,8 +24,9 @@ def menu():
                 CategoriaView.cadastrar_categoria()
             elif opcao_categoria == "2":
                 CategoriaView.detalhar_categorias()
-            #elif opcao_categoria == "3":
-                #TODO Fazer a view e controller que edita a categoria
+            elif opcao_categoria == "3":
+                CategoriaView.detalhar_categorias()
+                CategoriaView.editar_categoria()
             elif opcao_categoria == "4":
                 CategoriaView.detalhar_categorias()
                 CategoriaView.excluir_categoria()
