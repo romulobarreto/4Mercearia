@@ -13,10 +13,10 @@ class FornecedorDao:
             return []
         
     @classmethod    
-    def salvar_fornecedor(cls, categorias):
+    def salvar_fornecedor(cls, fornecedores):
         try:
             with open(cls.caminho_arquivo, "w") as arq:
-                json.dump(categorias, arq, indent=4)
+                json.dump(fornecedores, arq, indent=4)
                 return True, "✅ Dados salvos com sucesso."
         except Exception as e:
             return False, "❌ Dados não salvos por erro, favor, validar."
