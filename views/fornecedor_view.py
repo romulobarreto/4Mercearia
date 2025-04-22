@@ -1,14 +1,15 @@
-from controllers.categoria_controller import *
+from controllers.fornecedor_controller import *
 
-class CategoriaView:
+class FornecedorView:
 
     @staticmethod
     def cadastrar_categoria():
-        # Pede os inputs ao usuário de ID e Nome da categoria
-        nome = input("\nDigite o nome da categoria: ").strip().lower()
+        # Pede os inputs ao usuário de Nome e Telefone do fornecedor
+        nome = input("\nDigite o nome do fornecedor: ").strip().lower()
+        telefone = input("\nDigite o telefone (DDD + Número): ").strip().replace("(", "").replace(")", "").replace("-","").replace(" ","")
 
         # Cria o usuário e retorna a mensagem
-        sucesso, mensagem = CategoriaController.cadastrar_categoria(nome)
+        sucesso, mensagem = FornecedorController.cadastrar_fornecedor(nome, telefone)
         print(mensagem)
 
     
