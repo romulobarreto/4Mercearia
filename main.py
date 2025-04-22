@@ -6,7 +6,8 @@ def menu():
         print("\n🖥️ Sistema de gestão de mercearia")
         print("\n📄 Menu:")
         print("1️⃣ - Categoria")
-        print("2️⃣ - Sair")
+        print("2️⃣ - Fornecedor")
+        print("3️⃣ - Sair")
 
         opcao = input("\nEscolha uma das opções: ").strip()
 
@@ -36,6 +37,32 @@ def menu():
                 print("⚠️ Opção inválida! Tente novamente.\n")
 
         elif opcao == "2":
+            print("\n📌Menu de FORNECEDOR: ")
+            print("1️⃣ - Cadastrar Fornecedor")
+            print("2️⃣ - Detalhar Fornecedores")
+            print("3️⃣ - Editar Fornecedor")
+            print("4️⃣ - Excluir Fornecedor")
+            print("5️⃣ - Voltar")
+
+            opcao_fornecedor = input("\nEscolha uma das opções: ").strip()
+
+            if opcao_fornecedor == "1":
+                #CategoriaView.cadastrar_categoria() #TODO Ajustar para chamar a funcao de cadastrar fornecedor
+            elif opcao_fornecedor == "2":
+                #CategoriaView.detalhar_categorias() #TODO Ajustar para chamar a funcao de detalhar fornecedores
+            elif opcao_fornecedor == "3":
+                #CategoriaView.detalhar_categorias() #TODO Ajustar para chamar a funcao de detalhar fornecedores
+                #CategoriaView.editar_categoria() #TODO Ajustar para chamar a funcao de editar fornecedor
+            elif opcao_fornecedor == "4":
+                #CategoriaView.detalhar_categorias() #TODO Ajustar para chamar a funcao de detalhar fornecedores
+                #CategoriaView.excluir_categoria() #TODO Ajustar para chamar a funcao de excluir fornecedor
+            elif opcao_fornecedor == "5":
+                continue
+            else:
+                print("⚠️ Opção inválida! Tente novamente.\n")
+
+
+        elif opcao == "3":
             print("🚪 Saindo do programa...")
             break
         else:
