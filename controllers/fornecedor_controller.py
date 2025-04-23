@@ -10,7 +10,7 @@ class FornecedorController:
         padrao_telefone = re.compile("^[1-9][\d][1-9][\d]{3,4}[\d]{4}$")
 
         # Carrega a lista de fornecedores
-        fornecedores = FornecedorDao.carregar_categoria()
+        fornecedores = FornecedorDao.carregar_fornecedor()
 
         # Valida o valor de nome
         if not nome:
@@ -31,20 +31,27 @@ class FornecedorController:
 
     
     @staticmethod
-    def cadastrar_fornecedor(nome):
+    def cadastrar_fornecedor(nome, telefone):
+        # Chama a validação de dados
+        sucesso, mensagem = FornecedorController.validar_dados(nome,telefone)
+
+        if not sucesso:
+            return False, mensagem
         
+        # Carrega a lista de fornecedores
+        fornecedores = FornecedorDao.carregar_fornecedor()
         
         # Define o valor do maior_id
-        id = max([categoria["id"] for categoria in categorias], default=0) + 1
+        id = max([fornecedor["id"] for fornecedor in fornecedores], default=0) + 1
 
-        # Cria a categoria
-        categoria = Categoria(id, nome)
+        # Cria o fornecedor
+        fornecedor = Fornecedor(id, nome, telefone)
 
-        # Transforma a categoria em dicionário e adiciona na lista
-        categorias.append(categoria.salvar_dict())
+        # Transforma o fornecedor em dicionário e adiciona na lista
+        fornecedores.append(fornecedor.salvar_dict())
 
-        # Salva a lista de categoria no banco e exibe a mensagem
-        sucesso, mensagem = CategoriaDao.salvar_categoria(categorias)
+        # Salva a lista de fornecedores no banco e exibe a mensagem
+        sucesso, mensagem = FornecedorDao.salvar_fornecedor(fornecedores)
 
         if sucesso:
             return True, mensagem
