@@ -14,9 +14,9 @@ class FornecedorView:
 
     
     @staticmethod
-    def detalhar_categorias():
-        # Chama a função do controller para detalhar as categorias
-        sucesso, mensagem = CategoriaController.detalhar_categorias()
+    def detalhar_fornecedores():
+        # Chama a função do controller para detalhar os fornecedores
+        sucesso, mensagem = FornecedorController.detalhar_fornecedores()
         # Exibe resultado
         print(mensagem)
 
