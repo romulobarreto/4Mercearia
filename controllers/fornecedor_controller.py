@@ -62,17 +62,20 @@ class FornecedorController:
 
     @staticmethod
     def detalhar_fornecedores():
-        # Carregar categorias
-        categorias = CategoriaDao.carregar_categoria()
+        # Carregar fornecedores
+        fornecedores = FornecedorDao.carregar_fornecedor()
 
-        # Verifica se existe categoria cadastrada
-        if not categorias:
-            return False, "\n⚠️ A lista de categorias está vazia!"
+        # Verifica se existe fornecedor cadastrado
+        if not fornecedores:
+            return False, "\n⚠️ A lista de fornecedores está vazia!"
         
-        # Detalhar categorias
-        lista_formatada = "\n📋 Lista de usuários cadastrados:\n"
-        for index, categoria in enumerate(sorted(categorias, key=lambda c: c["nome"]), start=1):
-            lista_formatada += f"{index}°: {categoria["nome"].upper()}\n"
+        # Detalhar Fornecedores
+        lista_formatada = "\n📋 Lista de fornecedores cadastrados:\n"
+        for index, fornecedor in enumerate(sorted(fornecedores, key=lambda c: c["nome"]), start=1):
+            if len(fornecedor["telefone"]) == 11:
+                lista_formatada += f"{index}°: {fornecedor["nome"].upper()} - Telefone: ({fornecedor["telefone"][0:2]}) {fornecedor["telefone"][2:7]}-{fornecedor["telefone"][7:]}\n"
+            else:
+                lista_formatada += f"{index}°: {fornecedor["nome"].upper()} - Telefone: ({fornecedor["telefone"][0:2]}) {fornecedor["telefone"][2:6]}-{fornecedor["telefone"][6:]}\n"
         lista_formatada += "---------------------------"
 
         return True, lista_formatada
