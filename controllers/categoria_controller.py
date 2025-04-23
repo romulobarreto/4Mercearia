@@ -45,7 +45,7 @@ class CategoriaController:
             return False, "\n⚠️ A lista de categorias está vazia!"
         
         # Detalhar categorias
-        lista_formatada = "\n📋 Lista de usuários cadastrados:\n"
+        lista_formatada = "\n📋 Lista de categorias cadastradas:\n"
         for index, categoria in enumerate(sorted(categorias, key=lambda c: c["nome"]), start=1):
             lista_formatada += f"{index}°: {categoria["nome"].upper()}\n"
         lista_formatada += "---------------------------"
