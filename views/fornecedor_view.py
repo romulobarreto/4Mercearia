@@ -22,12 +22,12 @@ class FornecedorView:
 
 
     @staticmethod
-    def excluir_categoria():
+    def excluir_fornecedor():
         # Pega o input do usuário
-        nome = input("\nDigite a categoria que deseja excluir: ").strip().lower()
+        nome = input("\nDigite o nome do fornecedor que deseja excluir: ").strip().lower()
 
-        # Chama a função que exclui a categoria
-        sucesso, mensagem = CategoriaController.excluir_categoria(nome)
+        # Chama a função que exclui o fornecedor
+        sucesso, mensagem = FornecedorController.excluir_fornecedor(nome)
 
         # Exibe o resultado da função
         print(mensagem)
