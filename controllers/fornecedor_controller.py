@@ -18,7 +18,7 @@ class FornecedorController:
         
         for fornecedor in fornecedores:
             if fornecedor["nome"] == nome:
-                return False, f"\n⚠️ O fornecedor {nome} já está cadastrado."
+                return False, f"\n⚠️ O fornecedor {nome.upper()} já está cadastrado."
             
         validar_telefone = re.fullmatch(padrao_telefone, telefone)
 
@@ -84,36 +84,36 @@ class FornecedorController:
     
     @staticmethod
     def excluir_fornecedor(nome):
-        # Carrega categorias
-        categorias = CategoriaDao.carregar_categoria()
+        # Carrega fornecedores
+        fornecedores = FornecedorDao.carregar_fornecedor()
 
-        # Valida se existe categoria cadastrada
-        if not categorias:
-            return False, "⚠️ Não existe nenhuma categoria para excluir."
+        # Valida se existe fornecedor cadastrado
+        if not fornecedores:
+            return False, "⚠️ Não existe nenhum fornecedor para excluir."
 
-        # Valida o nome da categoria
+        # Valida o nome do fornecedor
         if not nome:
-            return False, "⚠️ A categoria não pode estar vazia."
+            return False, "⚠️ O nome não pode estar vazio."
         
-        # Valida se o nome da categoria está cadastrado
-        dicionario_categoria = None
-        for categoria in categorias:
-            if categoria["nome"] == nome:
-                dicionario_categoria = categoria
+        # Valida se o nome do fornecedor está cadastrado
+        dicionario_fornecedor = None
+        for fornecedor in fornecedores:
+            if fornecedor["nome"] == nome:
+                dicionario_fornecedor = fornecedor
                 break
 
-        if not dicionario_categoria:
-            return False, f"\n⚠️ A categoria {nome} não está cadastrada."
+        if not dicionario_fornecedor:
+            return False, f"\n⚠️ O fornecedor {nome.upper()} não está cadastrado."
         
-        # Verifica se a categoria está em uso com algum produto, se estiver, não pode ser excluída
+        # Verifica se o fornecedor está em uso com algum produto, se estiver, não pode ser excluído
         #TODO Criar a tabela e as funções de produtos para conseguir implementar essa regra de negócio
         
         # Remove o dicionário da categoria da base
-        categorias.remove(dicionario_categoria)
+        fornecedores.remove(dicionario_fornecedor)
 
         # Salva a lista atualizada na base
-        CategoriaDao.salvar_categoria(categorias)
-        return True, f"✅ A categoria {nome} foi deletada com sucesso."
+        FornecedorDao.salvar_fornecedor(fornecedores)
+        return True, f"✅ O fornecedor {nome.upper()} foi deletado com sucesso."
         
 
 
