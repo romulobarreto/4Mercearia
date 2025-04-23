@@ -1,4 +1,5 @@
 from views.categoria_view import *
+from views.fornecedor_view import *
 
 def menu():
     # Exibe o menu no terminal
@@ -47,13 +48,13 @@ def menu():
             opcao_fornecedor = input("\nEscolha uma das opções: ").strip()
 
             if opcao_fornecedor == "1":
-                #CategoriaView.cadastrar_categoria() #TODO Ajustar para chamar a funcao de cadastrar fornecedor
-            elif opcao_fornecedor == "2":
+                FornecedorView.cadastrar_fornecedor()
+            #elif opcao_fornecedor == "2":
                 #CategoriaView.detalhar_categorias() #TODO Ajustar para chamar a funcao de detalhar fornecedores
-            elif opcao_fornecedor == "3":
+            #elif opcao_fornecedor == "3":
                 #CategoriaView.detalhar_categorias() #TODO Ajustar para chamar a funcao de detalhar fornecedores
                 #CategoriaView.editar_categoria() #TODO Ajustar para chamar a funcao de editar fornecedor
-            elif opcao_fornecedor == "4":
+            #elif opcao_fornecedor == "4":
                 #CategoriaView.detalhar_categorias() #TODO Ajustar para chamar a funcao de detalhar fornecedores
                 #CategoriaView.excluir_categoria() #TODO Ajustar para chamar a funcao de excluir fornecedor
             elif opcao_fornecedor == "5":
