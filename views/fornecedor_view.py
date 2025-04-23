@@ -3,7 +3,7 @@ from controllers.fornecedor_controller import *
 class FornecedorView:
 
     @staticmethod
-    def cadastrar_categoria():
+    def cadastrar_fornecedor():
         # Pede os inputs ao usuário de Nome e Telefone do fornecedor
         nome = input("\nDigite o nome do fornecedor: ").strip().lower()
         telefone = input("\nDigite o telefone (DDD + Número): ").strip().replace("(", "").replace(")", "").replace("-","").replace(" ","")
