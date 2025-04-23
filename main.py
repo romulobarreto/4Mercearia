@@ -51,12 +51,16 @@ def menu():
                 FornecedorView.cadastrar_fornecedor()
             elif opcao_fornecedor == "2":
                 FornecedorView.detalhar_fornecedores()
-            #elif opcao_fornecedor == "3":
-                #CategoriaView.detalhar_categorias() #TODO Ajustar para chamar a funcao de detalhar fornecedores
+            elif opcao_fornecedor == "3":
+                # Chama a funcao de detalhar fornecedores
+                FornecedorView.detalhar_fornecedores()
+                # Chama a funcao de editar fornecedor
                 #CategoriaView.editar_categoria() #TODO Ajustar para chamar a funcao de editar fornecedor
-            #elif opcao_fornecedor == "4":
-                #CategoriaView.detalhar_categorias() #TODO Ajustar para chamar a funcao de detalhar fornecedores
-                #CategoriaView.excluir_categoria() #TODO Ajustar para chamar a funcao de excluir fornecedor
+            elif opcao_fornecedor == "4":
+                # Chama a funcao de detalhar fornecedores
+                FornecedorView.detalhar_fornecedores()
+                # Chama a funcao de excluir fornecedor
+                FornecedorView.excluir_fornecedor()
             elif opcao_fornecedor == "5":
                 continue
             else:
