@@ -5,7 +5,7 @@ import re
 class FornecedorController:
 
     @staticmethod
-    def validar_dados(nome, telefone):
+    def validar_dados(nome, telefone, nome_atual=None):
         # Define o padrão regex para telefone
         padrao_telefone = re.compile("^[1-9][\d][1-9][\d]{3,4}[\d]{4}$")
 
@@ -16,9 +16,8 @@ class FornecedorController:
         if not nome:
             return False, "⚠️ O nome não pode estar vazio."
         
-        for fornecedor in fornecedores:
-            if fornecedor["nome"] == nome:
-                return False, f"\n⚠️ O fornecedor {nome.upper()} já está cadastrado."
+        if nome != nome_atual and any(Fornecedor["nome"] == nome for fornecedor in fornecedores):
+            return False, "🚫 Usuário já cadastrado."
             
         validar_telefone = re.fullmatch(padrao_telefone, telefone)
 
