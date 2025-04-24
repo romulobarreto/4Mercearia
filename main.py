@@ -55,7 +55,7 @@ def menu():
                 # Chama a funcao de detalhar fornecedores
                 FornecedorView.detalhar_fornecedores()
                 # Chama a funcao de editar fornecedor
-                #CategoriaView.editar_categoria() #TODO Ajustar para chamar a funcao de editar fornecedor
+                FornecedorView.editar_fornecedor()
             elif opcao_fornecedor == "4":
                 # Chama a funcao de detalhar fornecedores
                 FornecedorView.detalhar_fornecedores()
