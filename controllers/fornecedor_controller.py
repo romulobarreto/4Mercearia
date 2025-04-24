@@ -3,6 +3,17 @@ from models.fornecedor import *
 import re
 
 class FornecedorController:
+    @staticmethod
+    def formatar_telefone(telefone):
+        # Formata o número do telefone de acordo com o padrão brasileiro
+        ddd = telefone[0:2]
+        if len(telefone) == 11:
+            corpo = telefone[2:7]
+            final = telefone[7:]
+        else:
+            corpo = telefone[2:6]
+            final = telefone[6:]
+        return f"({ddd}) {corpo}-{final}"
 
     @staticmethod
     def validar_dados(nome, telefone, nome_atual=None):
@@ -71,10 +82,7 @@ class FornecedorController:
         # Detalhar Fornecedores
         lista_formatada = "\n📋 Lista de fornecedores cadastrados:\n"
         for index, fornecedor in enumerate(sorted(fornecedores, key=lambda c: c["nome"]), start=1):
-            if len(fornecedor["telefone"]) == 11:
-                lista_formatada += f"{index}°: {fornecedor["nome"].upper()} - Telefone: ({fornecedor["telefone"][0:2]}) {fornecedor["telefone"][2:7]}-{fornecedor["telefone"][7:]}\n"
-            else:
-                lista_formatada += f"{index}°: {fornecedor["nome"].upper()} - Telefone: ({fornecedor["telefone"][0:2]}) {fornecedor["telefone"][2:6]}-{fornecedor["telefone"][6:]}\n"
+            lista_formatada += f"{index}°: {fornecedor["nome"].title()} - Telefone: {FornecedorController.formatar_telefone(fornecedor["telefone"])}\n"
         lista_formatada += "---------------------------"
 
         return True, lista_formatada
@@ -102,7 +110,7 @@ class FornecedorController:
                 break
 
         if not dicionario_fornecedor:
-            return False, f"\n⚠️ O fornecedor {nome.upper()} não está cadastrado."
+            return False, f"\n⚠️ O fornecedor {nome.title()} não está cadastrado."
         
         # Verifica se o fornecedor está em uso com algum produto, se estiver, não pode ser excluído
         #TODO Criar a tabela e as funções de produtos para conseguir implementar essa regra de negócio
@@ -112,35 +120,31 @@ class FornecedorController:
 
         # Salva a lista atualizada na base
         FornecedorDao.salvar_fornecedor(fornecedores)
-        return True, f"✅ O fornecedor {nome.upper()} foi deletado com sucesso."
+        return True, f"✅ O fornecedor {nome.title()} foi deletado com sucesso."
         
 
 
     @staticmethod
-    def editar_categoria(nome, novo_nome):
-        # Carrega lista de usuários
-        categorias = CategoriaDao.carregar_categoria()
-
-        # Valida o nome da categoria
-        if not novo_nome:
-            return False, f"✅ A categoria {nome.upper()} permanece a mesma."
-        
-        # Valida se o nome da categoria está cadastrado
-        for categoria in categorias:
-            if categoria["nome"] == novo_nome:
-                return False, f"⚠️ {novo_nome.upper()} já está em uso."
-            
-        # Encontra a lista que deve ser editado e faz a alteração
-        for categoria in categorias:
-            if categoria["nome"] == nome:
-                categoria["nome"] = novo_nome
-                break
-
-        # Salva a lista editada no banco
-        sucesso, mensagem = CategoriaDao.salvar_categoria(categorias)
-
-        # Mostra a mensagem de sucesso
-        if sucesso:
-            return True, f"{mensagem}\nCategoria antiga:{nome.upper()}\nCategoria nova: {novo_nome.upper()}"
-        else:
+    def editar_fornecedor(nome, telefone, lista_fornecedor):
+        # Valida os dados
+        sucesso, mensagem = FornecedorController.validar_dados(nome, telefone, lista_fornecedor["nome"])
+        if not sucesso:
             return False, mensagem
+
+        # Carrega lista de fornecedores
+        fornecedores = FornecedorDao.carregar_fornecedor()
+
+        # Encontra o fornecedor na lista e edita a informação diretamente
+        for fornecedor in fornecedores:
+            if fornecedor["nome"] == lista_fornecedor["nome"]:
+                fornecedor["nome"] = nome
+                fornecedor["telefone"] = telefone
+                break
+        
+        # Salva a lista editada no banco
+        sucesso, mensagem = FornecedorDao.salvar_fornecedor(fornecedores)
+
+        if sucesso:
+            return True, "✅ Fornecedor editado com sucesso."
+        else:
+            return False, "⚠️ Erro ao salvar a alteração no banco de dados."
