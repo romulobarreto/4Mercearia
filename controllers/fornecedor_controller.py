@@ -1,20 +1,9 @@
 from daos.fornecedor_dao import *
 from models.fornecedor import *
+from utils.formatacao import *
 import re
 
 class FornecedorController:
-    @staticmethod
-    def formatar_telefone(telefone):
-        # Formata o número do telefone de acordo com o padrão brasileiro
-        ddd = telefone[0:2]
-        if len(telefone) == 11:
-            corpo = telefone[2:7]
-            final = telefone[7:]
-        else:
-            corpo = telefone[2:6]
-            final = telefone[6:]
-        return f"({ddd}) {corpo}-{final}"
-
     @staticmethod
     def validar_dados(nome, telefone, nome_atual=None):
         # Define o padrão regex para telefone
@@ -82,7 +71,7 @@ class FornecedorController:
         # Detalhar Fornecedores
         lista_formatada = "\n📋 Lista de fornecedores cadastrados:\n"
         for index, fornecedor in enumerate(sorted(fornecedores, key=lambda c: c["nome"]), start=1):
-            lista_formatada += f"{index}°: {fornecedor["nome"].title()} - Telefone: {FornecedorController.formatar_telefone(fornecedor["telefone"])}\n"
+            lista_formatada += f"{index}°: {fornecedor["nome"].title()} - Telefone: {formatar_telefone(fornecedor["telefone"])}\n"
         lista_formatada += "---------------------------"
 
         return True, lista_formatada
