@@ -63,7 +63,7 @@ class FornecedorView:
             return
         
         # Mostra os detalhes do fornecedor selecionado
-        print(f"\n📋 Detalhes do fornecedor:\nID: {lista_fornecedor["id"]}\nNome: {lista_fornecedor["nome"].title()}\nTelefone: {FornecedorController.formatar_telefone(lista_fornecedor["telefone"])}")
+        print(f"\n📋 Detalhes do fornecedor:\nID: {lista_fornecedor["id"]}\nNome: {lista_fornecedor["nome"].title()}\nTelefone: {formatar_telefone(lista_fornecedor["telefone"])}")
         
         # Solicita a chave ao usuário
         chave = input("\nEscolha a opção que deseja editar:\nNome\nTelefone\n").strip().lower()
@@ -101,7 +101,7 @@ class FornecedorView:
                 return
             elif chave == "telefone":
                 print(mensagem)
-                print(f"✅ {nome_fornecedor.title()} teve o telefone atualizado:\nDe: {FornecedorController.formatar_telefone(lista_fornecedor["telefone"])}\nPara: {FornecedorController.formatar_telefone(telefone)}")
+                print(f"✅ {nome_fornecedor.title()} teve o telefone atualizado:\nDe: {formatar_telefone(lista_fornecedor["telefone"])}\nPara: {formatar_telefone(telefone)}")
                 return
         else:
             print(mensagem)
