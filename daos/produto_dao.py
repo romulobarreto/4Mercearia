@@ -13,10 +13,10 @@ class ProdutoDao:
             return []
         
     @classmethod    
-    def salvar_produto(cls, categorias):
+    def salvar_produto(cls, produtos):
         try:
             with open(cls.caminho_arquivo, "w") as arq:
-                json.dump(categorias, arq, indent=4)
+                json.dump(produtos, arq, indent=4)
                 return True, "✅ Dados salvos com sucesso."
         except Exception as e:
             return False, "❌ Dados não salvos por erro, favor, validar."
