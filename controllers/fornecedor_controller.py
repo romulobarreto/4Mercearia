@@ -16,7 +16,7 @@ class FornecedorController:
         if not nome:
             return False, "⚠️ O nome não pode estar vazio."
         
-        if nome != nome_atual and any(Fornecedor["nome"] == nome for fornecedor in fornecedores):
+        if nome != nome_atual and any(fornecedor["nome"] == nome for fornecedor in fornecedores):
             return False, "🚫 Usuário já cadastrado."
             
         validar_telefone = re.fullmatch(padrao_telefone, telefone)
