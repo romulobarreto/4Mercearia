@@ -148,7 +148,6 @@ O sistema precisa gerar os seguintes relatórios:
 - `funcionario_view.py`: Interface para operações de funcionários
 - `venda_view.py`: Interface para caixa e vendas
 - `relatorio_view.py`: Interface para geração de relatórios
-- `menu_view.py`: Menu principal do sistema
 
 ### 📂 Controllers
 - `produto_controller.py`: Lógica para gerenciar produtos
@@ -171,8 +170,10 @@ O sistema precisa gerar os seguintes relatórios:
 - `validacoes.py`: Funções para validação de dados
 - `formatacao.py`: Funções para formatação de dados
 - `exportacao.py`: Funções para exportação de relatórios para Excel
-- `gerador_id.py`: Funções para gerar IDs únicos
+- `buscas.py`: Funções para fazer buscas de informações com base em outras. Ex: Buscar ID a partir do nome
 
+### 📂 Main.py
+- `main.py`: Menu principal do sistema
 ---
 
 ## ⚡ Funcionalidades Essenciais
