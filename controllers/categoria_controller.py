@@ -1,5 +1,7 @@
 from daos.categoria_dao import *
+from daos.produto_dao import *
 from models.categoria import *
+from utils.buscas import buscar_id_categoria
 
 class CategoriaController:
     
@@ -56,8 +58,9 @@ class CategoriaController:
     
     @staticmethod
     def excluir_categoria(nome):
-        # Carrega categorias
+        # Carrega lista de categorias e produtos
         categorias = CategoriaDao.carregar_categoria()
+        produtos = ProdutoDao.carregar_produto()
 
         # Valida se existe categoria cadastrada
         if not categorias:
@@ -78,7 +81,11 @@ class CategoriaController:
             return False, f"\n⚠️ A categoria {nome} não está cadastrada."
         
         # Verifica se a categoria está em uso com algum produto, se estiver, não pode ser excluída
-        #TODO Criar a tabela e as funções de produtos para conseguir implementar essa regra de negócio
+        categoria_id = buscar_id_categoria(nome, categorias)
+
+        for produto in produtos:
+            if produto["categoria_id"] == categoria_id:
+                return False, f"\n⚠️ {nome.title()} não pode ser excluído pois está sendo usado por um produto."
         
         # Remove o dicionário da categoria da base
         categorias.remove(dicionario_categoria)
