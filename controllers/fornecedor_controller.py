@@ -1,6 +1,8 @@
 from daos.fornecedor_dao import *
+from daos.produto_dao import *
 from models.fornecedor import *
 from utils.formatacao import *
+from utils.buscas import buscar_id_fornecedor
 import re
 
 class FornecedorController:
@@ -80,8 +82,9 @@ class FornecedorController:
     
     @staticmethod
     def excluir_fornecedor(nome):
-        # Carrega fornecedores
+        # Carrega lista de fornecedores e produtos
         fornecedores = FornecedorDao.carregar_fornecedor()
+        produtos = ProdutoDao.carregar_produto()
 
         # Valida se existe fornecedor cadastrado
         if not fornecedores:
@@ -102,7 +105,11 @@ class FornecedorController:
             return False, f"\n⚠️ O fornecedor {nome.title()} não está cadastrado."
         
         # Verifica se o fornecedor está em uso com algum produto, se estiver, não pode ser excluído
-        #TODO Criar a tabela e as funções de produtos para conseguir implementar essa regra de negócio
+        fornecedor_id = buscar_id_fornecedor(nome, fornecedores)
+
+        for produto in produtos:
+            if produto["fornecedor_id"] == fornecedor_id:
+                return False, f"\n⚠️ {nome.title()} não pode ser excluído pois está sendo usado por um produto."
         
         # Remove o dicionário da categoria da base
         fornecedores.remove(dicionario_fornecedor)
