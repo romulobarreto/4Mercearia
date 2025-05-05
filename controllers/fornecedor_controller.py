@@ -3,13 +3,11 @@ from daos.produto_dao import *
 from models.fornecedor import *
 from utils.formatacao import *
 from utils.buscas import buscar_id_fornecedor
-import re
+from utils.validacao import validar_telefone
 
 class FornecedorController:
     @staticmethod
     def validar_dados(nome, telefone, nome_atual=None):
-        # Define o padrão regex para telefone
-        padrao_telefone = re.compile("^[1-9][\d][1-9][\d]{3,4}[\d]{4}$")
 
         # Carrega a lista de fornecedores
         fornecedores = FornecedorDao.carregar_fornecedor()
@@ -21,9 +19,9 @@ class FornecedorController:
         if nome != nome_atual and any(fornecedor["nome"] == nome for fornecedor in fornecedores):
             return False, "🚫 Fornecedor já cadastrado."
             
-        validar_telefone = re.fullmatch(padrao_telefone, telefone)
+        verficar_telefone = validar_telefone(telefone)
 
-        if not validar_telefone:
+        if not verficar_telefone:
             return False, f"⚠️ O telefone: {telefone} não está no padrão. Use o formato DDD + número (Ex: 11987654321)"
         
         return True, "✅ Dados aprovados."
