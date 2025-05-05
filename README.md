@@ -167,7 +167,7 @@ O sistema precisa gerar os seguintes relatórios:
 - `venda_dao.py`: Acesso a dados de vendas
 
 ### 📂 Utils
-- `validacoes.py`: Funções para validação de dados
+- `validacao.py`: Funções para validação de dados
 - `formatacao.py`: Funções para formatação de dados
 - `exportacao.py`: Funções para exportação de relatórios para Excel
 - `buscas.py`: Funções para fazer buscas de informações com base em outras. Ex: Buscar ID a partir do nome
