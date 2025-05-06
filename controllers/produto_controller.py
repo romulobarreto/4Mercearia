@@ -1,3 +1,4 @@
+from decimal import Decimal
 from models.produto import *
 from daos.produto_dao import *
 from daos.categoria_dao import *
@@ -22,7 +23,7 @@ class ProdutoController():
             return False, "\n🚫 Produto já cadastrado." 
         
         # Valida se o preço é maior que zero
-        if preco <= 0:
+        if preco <= Decimal('0'):
             return False, "\n⚠️ O produto não pode ser gratuíto."
         
         # Valida se a quantidade em estoque é igual ou superior a zero
