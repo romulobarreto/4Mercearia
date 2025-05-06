@@ -1,3 +1,4 @@
+from decimal import Decimal, InvalidOperation
 from controllers.produto_controller import *
 from views.fornecedor_view import *
 from views.categoria_view import *
@@ -20,8 +21,8 @@ class ProdutoView():
         # Solicita os inputs ao usuário
         nome = input("\nDigite o nome do produto: ").strip().lower()
         try:
-            preco = float(input("\nDigite o preço do produto: ").strip())
-        except ValueError:
+            preco = Decimal(input("\nDigite o preço do produto: ").strip())
+        except InvalidOperation:
             print("\n⚠️ O valor não está na formatação correta.")
             return
         try:
