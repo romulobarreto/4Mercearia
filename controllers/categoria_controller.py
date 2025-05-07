@@ -68,8 +68,10 @@ class CategoriaController:
             if categoria["id"] == id_categoria:
                 dicionario_categoria = categoria
                 break
-            else:
-                return False, f"⚠️ O ID: {id_categoria}, não está na lista de cadastro."
+        
+        if not dicionario_categoria:
+            return False, f"⚠️ O ID: {id_categoria}, não está na lista de cadastro."
+                
         
         # Verifica se a categoria está em uso com algum produto, se estiver, não pode ser excluída
         categoria_nome = buscar_nome_categoria(id_categoria, categorias)
@@ -84,25 +86,27 @@ class CategoriaController:
         CategoriaDao.salvar_categoria(categorias)
         return True, f"✅ A categoria {categoria_nome.title()} foi deletada com sucesso."
         
-        
+
 
     @staticmethod
-    def editar_categoria(nome, novo_nome):
+    def editar_categoria(id_categoria, novo_nome):
         # Carrega lista de usuários
         categorias = CategoriaDao.carregar_categoria()
 
+        categoria_nome = buscar_nome_categoria(id_categoria, categorias)
+
         # Valida o nome da categoria
         if not novo_nome:
-            return False, f"✅ A categoria {nome.upper()} permanece a mesma."
+            return False, f"✅ A categoria {categoria_nome.title()} permanece a mesma."
         
         # Valida se o nome da categoria está cadastrado
         for categoria in categorias:
             if categoria["nome"] == novo_nome:
-                return False, f"⚠️ {novo_nome.upper()} já está em uso."
+                return False, f"⚠️ {novo_nome.title()} já está em uso."
             
         # Encontra a lista que deve ser editado e faz a alteração
         for categoria in categorias:
-            if categoria["nome"] == nome:
+            if categoria["id"] == id_categoria:
                 categoria["nome"] = novo_nome
                 break
 
@@ -111,6 +115,6 @@ class CategoriaController:
 
         # Mostra a mensagem de sucesso
         if sucesso:
-            return True, f"{mensagem}\nCategoria antiga:{nome.upper()}\nCategoria nova: {novo_nome.upper()}"
+            return True, f"{mensagem}\nCategoria antiga: {categoria_nome.title()}\nCategoria nova: {novo_nome.title()}"
         else:
             return False, mensagem
