@@ -37,7 +37,7 @@ class CategoriaView:
             print(f"{categoria["id"]}: {categoria["nome"].title()}")
 
         # Solicita o ID da categoria que será excluída
-        id_categoria = input("\nDigite o ID categoria que deseja excluir (Caso não queira excluir nenhum, deixe em branco): ").strip()
+        id_categoria = input("\nDigite o ID categoria que deseja excluir (Caso não queira excluir nenhuma, deixe em branco): ").strip()
 
         if not id_categoria:
             print("✅ Nenhuma categoria foi excluída.")
@@ -62,38 +62,49 @@ class CategoriaView:
         # Carrega a lista de categorias
         categorias = CategoriaDao.carregar_categoria()
 
-        # Pega o input do usuário
-        nome = input("\nDigite a categoria que deseja editar: ").strip().lower()
-
         # Valida se existe categoria cadastrada
         if not categorias:
             print("⚠️ Não existe nenhuma categoria para editar.")
-            return
+            return 
+        
+        # Exibe lista de categorias cadastradas
+        print("\n📋 Lista de categorias:")
+        for categoria in sorted(categorias, key=lambda c: c["nome"]):
+            print(f"{categoria["id"]}: {categoria["nome"].title()}")
 
-        # Valida o nome da categoria
-        if not nome:
-            print("⚠️ A categoria não pode estar vazia.")
+        # Pega o input do usuário
+        id_categoria = input("\nDigite o ID da categoria que deseja editar (Caso não queira editar nenhuma, deixe em branco): ").strip()
+
+        if not id_categoria:
+            print("✅ Nenhuma categoria foi alterada.")
             return
         
-        # Valida se o nome da categoria está cadastrado
+        try:
+            id_categoria = int(id_categoria)
+        except ValueError:
+            print("\n⚠️ O valor não está na formatação correta.")
+            return
+        
+        # Valida se o ID da categoria está cadastrado
         dicionario_categoria = None
         for categoria in categorias:
-            if categoria["nome"] == nome:
+            if categoria["id"] == id_categoria:
                 dicionario_categoria = categoria
                 break
-
+        
         if not dicionario_categoria:
-            print(f"\n⚠️ A categoria {nome} não está cadastrada.")
+            print(f"\n⚠️ O ID: {id_categoria}, não está na lista de cadastro.")
             return
+                
         
         # Mostra os detalhes da categoria selecionada
-        print(f"\nDetalhes da categoria:\nID: {dicionario_categoria["id"]}\nNome: {dicionario_categoria["nome"].upper()}")
+        print(f"\nDetalhes da categoria:\nID: {dicionario_categoria["id"]}\nNome: {dicionario_categoria["nome"].title()}")
 
         # Input com o nome atualizado
         novo_nome = input('\nDigite o novo nome da categoria (ou pressione Enter para manter o mesmo): ').strip().lower()
 
         # Chama a função de editar a categoria
-        sucesso, mensagem = CategoriaController.editar_categoria(nome, novo_nome)
+        sucesso, mensagem = CategoriaController.editar_categoria(id_categoria, novo_nome)
 
         # Mostra a mensagem de sucesso
         print(mensagem)
