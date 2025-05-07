@@ -107,11 +107,37 @@ class ProdutoController():
 
             lista_formatada += (
                 f"{index}°: {produto["nome"].title()}\n"
-                f"Preço: {formatar_preco(produto["preco"])}\n"
+                f"Preço: {formatar_preco(Decimal(produto["preco"]))}\n"
                 f"Quantidade em estoque: {produto["quantidade"]}\n"
                 f"Categoria: {categoria_nome.title()}\n"
                 f"Fornecedor: {fornecedor_nome.title()}\n"
-                f"---------------------------"
+                f"---------------------------\n"
             )
 
         return True, lista_formatada
+    
+
+    @staticmethod
+    def excluir_produto(id_produto):
+        # Carrega a lista de produtos
+        produtos = ProdutoDao.carregar_produto()
+
+        # Verifica se o ID informado está na base de produtos
+        dicionario_produto = None
+        for produto in produtos:
+            if produto["id"] == id_produto:
+                dicionario_produto = produto
+                break
+            else:
+                return False, f"\n⚠️ {id_produto} não a nenhum ID da lista de produtos."
+            
+        # Verifica se o dicionário escolhido faz parte de uma venda, se fizer, encerra
+        #TODO Criar a parte do caixa da mercearia e implementar a regra de negócio
+            
+        # Pega o dicionário do produto escolhido e remove da lista da produtos
+        produtos.remove(dicionario_produto)
+
+        # Salva a lista atualizada
+        sucesso, mensagem = ProdutoDao.salvar_produto(produtos)
+
+        return True, f"\n✅ {dicionario_produto["nome"].title()} foi removido com sucesso."
