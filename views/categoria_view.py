@@ -1,4 +1,5 @@
 from controllers.categoria_controller import *
+from utils.buscas import criar_dict_categorias
 
 class CategoriaView:
 
@@ -22,11 +23,34 @@ class CategoriaView:
 
     @staticmethod
     def excluir_categoria():
-        # Pega o input do usuário
-        nome = input("\nDigite a categoria que deseja excluir: ").strip().lower()
+        # Carrega a lista de categorias
+        categorias = CategoriaDao.carregar_categoria()
+
+        # Valida se existe categoria cadastrada
+        if not categorias:
+            print("⚠️ Não existe nenhuma categoria para excluir.")
+            return 
+        
+        # Exibe lista de categorias cadastradas
+        print("\n📋 Lista de categorias:")
+        for categoria in sorted(categorias, key=lambda c: c["nome"]):
+            print(f"{categoria["id"]}: {categoria["nome"].title()}")
+
+        # Solicita o ID da categoria que será excluída
+        id_categoria = input("\nDigite o ID categoria que deseja excluir (Caso não queira excluir nenhum, deixe em branco): ").strip()
+
+        if not id_categoria:
+            print("✅ Nenhuma categoria foi excluída.")
+            return
+        
+        try:
+            id_categoria = int(id_categoria)
+        except ValueError:
+            print("\n⚠️ O valor não está na formatação correta.")
+            return
 
         # Chama a função que exclui a categoria
-        sucesso, mensagem = CategoriaController.excluir_categoria(nome)
+        sucesso, mensagem = CategoriaController.excluir_categoria(id_categoria)
 
         # Exibe o resultado da função
         print(mensagem)
