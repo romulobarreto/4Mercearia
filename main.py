@@ -38,7 +38,6 @@ def menu():
                     CategoriaView.detalhar_categorias()
                     CategoriaView.editar_categoria()
                 elif opcao_categoria == "4":
-                    CategoriaView.detalhar_categorias()
                     CategoriaView.excluir_categoria()
                 elif opcao_categoria == "5":
                     break
