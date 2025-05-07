@@ -95,11 +95,9 @@ def menu():
                     #ProdutoView.detalhar_produtos()
                     # Chama a funcao de editar fornecedor
                     #FornecedorView.editar_fornecedor() #TODO Criar função de editar os produtos
-                #elif opcao_produto == "4":
-                    # Chama a funcao de detalhar produtos
-                    #ProdutoView.detalhar_produtos()
+                elif opcao_produto == "4":
                     # Chama a funcao de excluir fornecedor
-                    #FornecedorView.excluir_fornecedor() #TODO Criar função de excluir os produtos caso não estejam vinculados a venda
+                    ProdutoView.excluir_produto()
                 elif opcao_produto == "5":
                     break
                 else:
