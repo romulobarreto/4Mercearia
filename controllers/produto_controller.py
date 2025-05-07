@@ -128,8 +128,10 @@ class ProdutoController():
             if produto["id"] == id_produto:
                 dicionario_produto = produto
                 break
-            else:
-                return False, f"\n⚠️ {id_produto} não a nenhum ID da lista de produtos."
+        
+        if not dicionario_produto:
+            return False, f"\n⚠️ {id_produto} não está na lista de produtos."
+                
             
         # Verifica se o dicionário escolhido faz parte de uma venda, se fizer, encerra
         #TODO Criar a parte do caixa da mercearia e implementar a regra de negócio
