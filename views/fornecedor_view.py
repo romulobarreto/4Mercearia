@@ -23,11 +23,34 @@ class FornecedorView:
 
     @staticmethod
     def excluir_fornecedor():
-        # Pega o input do usuário
-        nome = input("\nDigite o nome do fornecedor que deseja excluir: ").strip().lower()
+        # Carrega a lista de fornecedores
+        fornecedores = FornecedorDao.carregar_fornecedor()
+
+        # Verifica se existe fornecedor cadastrado
+        if not fornecedores:
+            print("⚠️ Não existe nenhum fornecedor para excluir.")
+            return 
+        
+        # Mostra a lista de fornecedores ao usuário
+        print("\n📋 Lista de fornecedores:")
+        for fornecedor in sorted(fornecedores, key=lambda c: c["nome"]):
+            print(f"{fornecedor["id"]}: {fornecedor["nome"].title()}")
+
+        # Pega o input do usuário do ID do fornecedor e valida
+        id_fornecedor = input("\nDigite o ID do fornecedor que deseja excluir (Caso não queira excluir nenhum, deixe em branco): ").strip()
+
+        if not id_fornecedor:
+            print("✅ Nenhum fornecedor foi excluído.")
+            return
+        
+        try:
+            id_fornecedor = int(id_fornecedor)
+        except ValueError:
+            print("\n⚠️ O valor não está na formatação correta.")
+            return
 
         # Chama a função que exclui o fornecedor
-        sucesso, mensagem = FornecedorController.excluir_fornecedor(nome)
+        sucesso, mensagem = FornecedorController.excluir_fornecedor(id_fornecedor)
 
         # Exibe o resultado da função
         print(mensagem)
