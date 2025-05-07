@@ -8,4 +8,4 @@ class Produto:
         self.fornecedor_id = fornecedor_id
 
     def salvar_dict(self):
-        return {"id": self.id, "nome": self.nome, "preco": self.preco, "quantidade": self.quantidade, "categoria_id": self.categoria_id, "fornecedor_id": self.fornecedor_id}
+        return {"id": self.id, "nome": self.nome, "preco": str(self.preco), "quantidade": self.quantidade, "categoria_id": self.categoria_id, "fornecedor_id": self.fornecedor_id}
