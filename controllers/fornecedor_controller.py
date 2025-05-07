@@ -2,7 +2,7 @@ from daos.fornecedor_dao import *
 from daos.produto_dao import *
 from models.fornecedor import *
 from utils.formatacao import *
-from utils.buscas import buscar_id_fornecedor
+from utils.buscas import buscar_nome_fornecedor
 from utils.validacao import validar_telefone
 
 class FornecedorController:
@@ -79,42 +79,33 @@ class FornecedorController:
 
     
     @staticmethod
-    def excluir_fornecedor(nome):
+    def excluir_fornecedor(id_fornecedor):
         # Carrega lista de fornecedores e produtos
         fornecedores = FornecedorDao.carregar_fornecedor()
         produtos = ProdutoDao.carregar_produto()
-
-        # Valida se existe fornecedor cadastrado
-        if not fornecedores:
-            return False, "⚠️ Não existe nenhum fornecedor para excluir."
-
-        # Valida o nome do fornecedor
-        if not nome:
-            return False, "⚠️ O nome não pode estar vazio."
         
-        # Valida se o nome do fornecedor está cadastrado
+        # Valida se o ID do fornecedor está cadastrado
         dicionario_fornecedor = None
         for fornecedor in fornecedores:
-            if fornecedor["nome"] == nome:
+            if fornecedor["id"] == id_fornecedor:
                 dicionario_fornecedor = fornecedor
                 break
 
         if not dicionario_fornecedor:
-            return False, f"\n⚠️ O fornecedor {nome.title()} não está cadastrado."
+            return False, f"\n⚠️ O ID: {id_fornecedor} não está na lista de fornecedores."
         
         # Verifica se o fornecedor está em uso com algum produto, se estiver, não pode ser excluído
-        fornecedor_id = buscar_id_fornecedor(nome, fornecedores)
-
+        nome_fornecedor = buscar_nome_fornecedor(id_fornecedor, fornecedores)
         for produto in produtos:
-            if produto["fornecedor_id"] == fornecedor_id:
-                return False, f"\n⚠️ {nome.title()} não pode ser excluído pois está sendo usado por um produto."
+            if produto["fornecedor_id"] == id_fornecedor:
+                return False, f"\n⚠️ {nome_fornecedor.title()} não pode ser excluído pois está sendo usado por um produto."
         
         # Remove o dicionário da categoria da base
         fornecedores.remove(dicionario_fornecedor)
 
         # Salva a lista atualizada na base
         FornecedorDao.salvar_fornecedor(fornecedores)
-        return True, f"✅ O fornecedor {nome.title()} foi deletado com sucesso."
+        return True, f"✅ O fornecedor {nome_fornecedor.title()} foi excluído com sucesso."
         
 
 
