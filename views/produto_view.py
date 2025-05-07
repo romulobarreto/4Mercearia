@@ -50,3 +50,37 @@ class ProdutoView():
         sucesso, mensagem = ProdutoController.detalhar_produtos()
         # Exibe o resultado
         print(mensagem)
+
+
+    @staticmethod
+    def excluir_produto():
+        # Chama a lista de produto
+        produtos = ProdutoDao.carregar_produto()
+
+        # Se a lista estiver vazia, encerra a função
+        if not produtos:
+            return False, "\n⚠️ Não existem produtos para serem excluídos."
+        
+        # Chama e exibe a lista de produtos para o usuário ver as opções e escolher uma
+        print("\n📋 Lista de produtos:")
+        for produto in sorted(produtos, key=lambda c: c["nome"]):
+            print(f"{produto["id"]}: {produto["nome"].title()}")
+
+        # Solicita ao usuário o ID do produto que ele deseja excluir
+        id_produto = input("\nDigite o ID do produto que deseja excluir (Caso não queira excluir nenhum, deixe em branco): ")
+
+        if not id_produto:
+            print("✅ Nenhum produto foi excluído.")
+            return
+
+        # Converte o ID para INT
+        try:
+            id_produto = int(id_produto)
+        except ValueError:
+            print("\n⚠️ O valor não está na formatação correta.")
+            return       
+
+        # Chama a função de excluir o produto
+        sucesso, mensagem = ProdutoController.excluir_produto(id_produto)
+
+        print(mensagem)
