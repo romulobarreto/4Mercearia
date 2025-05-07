@@ -1,7 +1,7 @@
 from daos.categoria_dao import *
 from daos.produto_dao import *
 from models.categoria import *
-from utils.buscas import buscar_id_categoria
+from utils.buscas import buscar_nome_categoria
 
 class CategoriaController:
     
@@ -57,44 +57,34 @@ class CategoriaController:
 
     
     @staticmethod
-    def excluir_categoria(nome):
+    def excluir_categoria(id_categoria):
         # Carrega lista de categorias e produtos
         categorias = CategoriaDao.carregar_categoria()
         produtos = ProdutoDao.carregar_produto()
 
-        # Valida se existe categoria cadastrada
-        if not categorias:
-            return False, "⚠️ Não existe nenhuma categoria para excluir."
-
-        # Valida o nome da categoria
-        if not nome:
-            return False, "⚠️ A categoria não pode estar vazia."
-        
-        # Valida se o nome da categoria está cadastrado
+        # Valida se o id da categoria está cadastrado
         dicionario_categoria = None
         for categoria in categorias:
-            if categoria["nome"] == nome:
+            if categoria["id"] == id_categoria:
                 dicionario_categoria = categoria
                 break
-
-        if not dicionario_categoria:
-            return False, f"\n⚠️ A categoria {nome} não está cadastrada."
+            else:
+                return False, f"⚠️ O ID: {id_categoria}, não está na lista de cadastro."
         
         # Verifica se a categoria está em uso com algum produto, se estiver, não pode ser excluída
-        categoria_id = buscar_id_categoria(nome, categorias)
-
+        categoria_nome = buscar_nome_categoria(id_categoria, categorias)
         for produto in produtos:
-            if produto["categoria_id"] == categoria_id:
-                return False, f"\n⚠️ {nome.title()} não pode ser excluído pois está sendo usado por um produto."
+            if produto["categoria_id"] == id_categoria:
+                return False, f"\n⚠️ {categoria_nome.title()} não pode ser excluído pois está sendo usado por um produto."
         
         # Remove o dicionário da categoria da base
         categorias.remove(dicionario_categoria)
 
         # Salva a lista atualizada na base
         CategoriaDao.salvar_categoria(categorias)
-        return True, f"✅ A categoria {nome} foi deletada com sucesso."
+        return True, f"✅ A categoria {categoria_nome.title()} foi deletada com sucesso."
         
-
+        
 
     @staticmethod
     def editar_categoria(nome, novo_nome):
