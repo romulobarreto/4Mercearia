@@ -82,13 +82,9 @@ def menu():
                     ProdutoView.cadastrar_produto()
                 elif opcao_produto == "2":
                     ProdutoView.detalhar_produtos()
-                #elif opcao_produto == "3":
-                    # Chama a funcao de detalhar produtos 
-                    #ProdutoView.detalhar_produtos()
-                    # Chama a funcao de editar fornecedor
-                    #FornecedorView.editar_fornecedor() #TODO Criar função de editar os produtos
+                elif opcao_produto == "3":
+                    ProdutoView.editar_produto()
                 elif opcao_produto == "4":
-                    # Chama a funcao de excluir fornecedor
                     ProdutoView.excluir_produto()
                 elif opcao_produto == "5":
                     break
