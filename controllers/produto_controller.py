@@ -4,7 +4,7 @@ from daos.produto_dao import *
 from daos.categoria_dao import *
 from daos.fornecedor_dao import *
 from utils.formatacao import formatar_preco
-from utils.buscas import criar_dict_categorias, criar_dict_fornecedores, buscar_id_categoria, buscar_id_fornecedor
+from utils.buscas import criar_dict_categorias, criar_dict_fornecedores
 
 class ProdutoController():
     @staticmethod
@@ -51,9 +51,9 @@ class ProdutoController():
     
 
     @staticmethod
-    def cadastrar_produto(nome, preco, quantidade, categoria_nome, fornecedor_nome):
+    def cadastrar_produto(nome, preco, quantidade, categoria_id, fornecedor_id):
         # Chama a função e valida os dados inputados
-        sucesso, mensagem = ProdutoController.validar_dados(nome, preco, quantidade, categoria_nome, fornecedor_nome)
+        sucesso, mensagem = ProdutoController.validar_dados(nome, preco, quantidade, categoria_id, fornecedor_id)
         if not sucesso:
             return False, mensagem
         
@@ -64,12 +64,6 @@ class ProdutoController():
 
         # Define o valor do ID para produto
         id = max([produto["id"] for produto in produtos], default=0) + 1
-
-        # Chama o ID da categoria
-        categoria_id = buscar_id_categoria(categoria_nome, categorias)
-
-        # Chama o ID do fornecedor
-        fornecedor_id = buscar_id_fornecedor(fornecedor_nome, fornecedores)
 
         # Cria o produto
         produto = Produto(id, nome, preco, quantidade, categoria_id, fornecedor_id)
