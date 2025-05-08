@@ -23,7 +23,7 @@ class ProdutoView():
         # Solicita os inputs ao usuário
         nome = input("\nDigite o nome do produto: ").strip().lower()
         try:
-            preco = Decimal(input("\nDigite o preço do produto: ").strip())
+            preco = Decimal(input("\nDigite o preço do produto: R$").strip().replace(".", "").replace(",", "."))
         except InvalidOperation:
             print("\n⚠️ O valor não está na formatação correta.")
             return
@@ -203,7 +203,7 @@ class ProdutoView():
 
         # Caso queira mudar o preco
         elif chave == "preco":
-            preco = input('\nDigite o novo preço do produto (ou pressione Enter para manter o mesmo): ').strip()
+            preco = input('\nDigite o novo preço do produto (ou pressione Enter para manter o mesmo): R$').strip().replace(".", "").replace(",", ".")
             if not preco:
                 print(f"\n✅ O produto: {lista_produto["nome"].title()} teve o preço mantido.")
                 return
