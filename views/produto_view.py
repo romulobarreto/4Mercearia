@@ -32,15 +32,41 @@ class ProdutoView():
             return
         
         # Mostra as categorias disponíveis para o usuário escolher uma
-        CategoriaView.detalhar_categorias()
-        categoria_nome = input("\nDigite o nome da categoria (ou deixe vazio para interromper o cadastro): ").strip().lower()
+        print("\n📋 Lista de categorias:")
+        for categoria in sorted(categorias, key=lambda c: c["nome"]):
+            print(f"{categoria["id"]}: {categoria["nome"].title()}")
+
+        categoria_id = input("\nDigite o ID da categoria (ou deixe vazio para interromper o cadastro): ").strip()
+
+        if not categoria_id:
+            print("✅ Nenhuma categoria foi alterada.")
+            return
+        
+        try:
+            categoria_id = int(categoria_id)
+        except ValueError:
+            print("\n⚠️ O valor não está na formatação correta.")
+            return
 
         # Mostra os fornecedores disponíveis para o usuário escolher um
-        FornecedorView.detalhar_fornecedores()
-        fornecedor_nome = input("\nDigite o nome do fornecedor (ou deixe vazio para interromper o cadastro): ").strip().lower()
+        print("\n📋 Lista de fornecedores:")
+        for fornecedor in sorted(fornecedores, key=lambda c: c["nome"]):
+            print(f"{fornecedor["id"]}: {fornecedor["nome"].title()}")
+
+        fornecedor_id = input("\nDigite o ID do fornecedor (ou deixe vazio para interromper o cadastro): ").strip()
+
+        if not fornecedor_id:
+            print("✅ Nenhum fornecedor foi editado.")
+            return
+        
+        try:
+            fornecedor_id = int(fornecedor_id)
+        except ValueError:
+            print("\n⚠️ O valor não está na formatação correta.")
+            return
 
         # Chama a função de cadastrar um produto
-        sucesso, mensagem = ProdutoController.cadastrar_produto(nome, preco, quantidade, categoria_nome, fornecedor_nome)
+        sucesso, mensagem = ProdutoController.cadastrar_produto(nome, preco, quantidade, categoria_id, fornecedor_id)
         print(mensagem)
 
 
