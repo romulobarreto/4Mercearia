@@ -8,7 +8,7 @@ from utils.buscas import criar_dict_categorias, criar_dict_fornecedores
 
 class ProdutoController():
     @staticmethod
-    def validar_dados(nome, preco, quantidade, categoria_nome, fornecedor_nome, nome_atual=None):
+    def validar_dados(nome, preco, quantidade, categoria_id, fornecedor_id, nome_atual=None):
         # Carregar lista de produtos, categorias e fornecedores
         produtos = ProdutoDao.carregar_produto()
         categorias = CategoriaDao.carregar_categoria()
@@ -30,25 +30,20 @@ class ProdutoController():
         if quantidade < 0:
             return False, "\n⚠️ Não é possível ter estoque negativo de um produto."
         
-        # Se categoria estiver vazia, cancela a validação
-        if not categoria_nome:
-            return False, f"⚠️ Cadastro interrompido."
-        
         # Valida se a categoria é valida
-        if not any(categoria["nome"] == categoria_nome for categoria in categorias):
-            return False, f"\n⚠️ {categoria_nome.title()} não está na lista de categorias."
-        
-        # Se fornecedor estiver vazio, cancela a validação
-        if not fornecedor_nome:
-            return False, f"⚠️ Cadastro interrompido."
-
+        if not any(categoria["id"] == categoria_id for categoria in categorias):
+            return False, f"\n⚠️ O ID: {categoria_id} não está na lista de categorias."
+    
         # Valida se o fornecedor é válido
-        if not any(fornecedor["nome"] == fornecedor_nome for fornecedor in fornecedores):
-            return False, f"\n⚠️ {fornecedor_nome.title()} não está na lista de fornecedores."
+        if not any(fornecedor["id"] == fornecedor_id for fornecedor in fornecedores):
+            return False, f"\n⚠️ O ID: {fornecedor_id} não está na lista de fornecedores."
         
         # Mensagem de sucesso
         return True, "\n✅ Dados aprovados."
     
+
+
+
 
     @staticmethod
     def cadastrar_produto(nome, preco, quantidade, categoria_id, fornecedor_id):
@@ -77,6 +72,9 @@ class ProdutoController():
         else:
             return False, mensagem
         
+
+
+
 
     @staticmethod
     def detalhar_produtos():
@@ -111,6 +109,9 @@ class ProdutoController():
         return True, lista_formatada
     
 
+
+
+
     @staticmethod
     def excluir_produto(id_produto):
         # Carrega a lista de produtos
@@ -137,3 +138,35 @@ class ProdutoController():
         sucesso, mensagem = ProdutoDao.salvar_produto(produtos)
 
         return True, f"\n✅ {dicionario_produto["nome"].title()} foi removido com sucesso."
+    
+
+
+
+    @staticmethod
+    def editar_produto(nome, preco, quantidade, categoria_id, fornecedor_id, lista_produto):
+        # Chama a validação de dados
+        sucesso, mensagem = ProdutoController.validar_dados(nome, preco, quantidade, categoria_id, fornecedor_id, lista_produto["nome"])
+
+        if not sucesso:
+            return False, mensagem
+        
+        # Carrega a lista de produtos
+        produtos = ProdutoDao.carregar_produto()
+
+        # Atualiza os dados novos na lista
+        for produto in produtos:
+            if produto["id"] == lista_produto["id"]:
+                produto["nome"] = nome
+                produto["preco"] = str(preco)
+                produto["quantidade"] = quantidade
+                produto["categoria_id"] = categoria_id
+                produto["fornecedor_id"] = fornecedor_id
+                break
+
+        # Salva as alterações no banco
+        sucesso, mensagem = ProdutoDao.salvar_produto(produtos)
+        
+        if sucesso:
+            return True, "✅ Produto editado com sucesso."
+        else:
+            return False, "⚠️ Erro ao salvar a alteração no banco de dados."
