@@ -67,22 +67,34 @@ class FornecedorView:
             print("⚠️ Não existe nenhum fornecedor para editar.")
             return
 
-        # Pega o input do usuário
-        nome_fornecedor = input("\nDigite o nome do fornecedor que deseja editar: ").strip().lower()
+        # Exibe a lista de fornecedores cadastrados
+        print("\n📋 Lista de fornecedores:")
+        for fornecedor in sorted(fornecedores, key=lambda c: c["nome"]):
+            print(f"{fornecedor["id"]}: {fornecedor["nome"].title()}")
+            
+
+        # Pega o input do usuário do ID do usuário que deseja editar
+        id_fornecedor = input("\nDigite o ID do fornecedor que deseja editar (Caso não queira excluir nenhum, deixe em branco): ").strip()
 
         # Valida se o nome_fornecedor está na lista de fornecedores e se não está vazio
-        if not nome_fornecedor:
-            print(f'⚠️ O nome digitado não pode ser vazio.')
+        if not id_fornecedor:
+            print("✅ Nenhum fornecedor foi editado.")
+            return
+        
+        try:
+            id_fornecedor = int(id_fornecedor)
+        except ValueError:
+            print("\n⚠️ O valor não está na formatação correta.")
             return
 
         lista_fornecedor = None
         for fornecedor in fornecedores:
-            if fornecedor["nome"] == nome_fornecedor:
+            if fornecedor["id"] == id_fornecedor:
                 lista_fornecedor = fornecedor
                 break
         
         if not lista_fornecedor:
-            print(f"❌ {nome_fornecedor} não é um fornecedor cadastrado.")
+            print(f"❌ O ID: {id_fornecedor}, não é um fornecedor cadastrado.")
             return
         
         # Mostra os detalhes do fornecedor selecionado
@@ -120,11 +132,11 @@ class FornecedorView:
         if sucesso:
             if chave == "nome":
                 print(mensagem)
-                print(f"✅ {nome_fornecedor.title()} teve o nome atualizado:\nDe: {lista_fornecedor["nome"].title()}\nPara: {nome.title()}")
+                print(f"✅ O fornecedor teve o nome atualizado:\nDe: {lista_fornecedor["nome"].title()}\nPara: {nome.title()}")
                 return
             elif chave == "telefone":
                 print(mensagem)
-                print(f"✅ {nome_fornecedor.title()} teve o telefone atualizado:\nDe: {formatar_telefone(lista_fornecedor["telefone"])}\nPara: {formatar_telefone(telefone)}")
+                print(f"✅ {lista_fornecedor["nome"].title()} teve o telefone atualizado:\nDe: {formatar_telefone(lista_fornecedor["telefone"])}\nPara: {formatar_telefone(telefone)}")
                 return
         else:
             print(mensagem)
