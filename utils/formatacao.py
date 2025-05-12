@@ -10,6 +10,19 @@ def formatar_telefone(telefone):
         return f"({ddd}) {corpo}-{final}"
 
 
+
+
+
+
+def formatar_cpf(cpf):
+     # Formata o número do CPF com "." e "-"
+     return f"{cpf[0:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:]}"
+
+
+
+
+
+
 def formatar_preco(preco):
      # Formata o preço para ser exibido no formato Real(R$)
      preco_formatado = f"R${preco:,.2f}".replace(",", "v").replace(".",",").replace("v",".")
