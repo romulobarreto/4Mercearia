@@ -1,6 +1,7 @@
 from views.categoria_view import *
 from views.fornecedor_view import *
 from views.produto_view import *
+from views.cliente_view import *
 
 def menu():
     # Exibe o menu no terminal
@@ -90,6 +91,32 @@ def menu():
                     break
                 else:
                     print("⚠️ Opção inválida! Tente novamente.\n")
+
+
+        elif opcao == "5":
+            while True:
+                print("\n📌Menu de CLIENTE: ")
+                print("1️⃣ - Cadastrar Cliente")
+                print("2️⃣ - Detalhar Clientes")
+                print("3️⃣ - Editar Cliente")
+                print("4️⃣ - Excluir Cliente")
+                print("5️⃣ - Voltar")
+
+                opcao_cliente = input("\nEscolha uma das opções: ").strip()
+
+                if opcao_cliente == "1":
+                    ClienteView.cadastrar_cliente()
+                elif opcao_cliente == "2":
+                    ClienteView.detalhar_clientes()
+                #elif opcao_cliente == "3":
+                    #ProdutoView.editar_produto()
+                #elif opcao_cliente == "4":
+                    #ProdutoView.excluir_produto()
+                elif opcao_cliente == "5":
+                    break
+                else:
+                    print("⚠️ Opção inválida! Tente novamente.\n")
+
 
 
         elif opcao == "8":
