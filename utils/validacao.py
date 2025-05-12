@@ -5,7 +5,7 @@ import re
 # Função para validar telefone com regex
 def validar_telefone(telefone):
     # Padrão regex
-    padrao_telefone = re.compile("^[1-9][\d][1-9][\d]{3,4}[\d]{4}$")
+    padrao_telefone = re.compile(r"^[1-9][\d][1-9][\d]{3,4}[\d]{4}$")
 
     validar_telefone = re.fullmatch(padrao_telefone, telefone)
 
@@ -20,3 +20,15 @@ validador_cpf = CPF()
 def validar_cpf(cpf):
     # Chama a função que valida o CPF e retorna True ou False
     return validador_cpf.validate(cpf)
+
+
+
+
+# Função para validar o endereço (Garantir que tenha letras e números)
+def validar_endereco(endereco):
+    # Padrão regex
+    padrao_endereco = re.compile(r"^[a-zA-Z]+(?: [A-Za-zÀ-ÿ]+)* \d+[A-Za-z0-9\-]*$")
+
+    validar_endereco = re.fullmatch(padrao_endereco, endereco)
+
+    return validar_endereco
