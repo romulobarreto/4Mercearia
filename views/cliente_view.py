@@ -44,9 +44,7 @@ class ClienteView():
             return
 
         # Exibe lista de clientes ao usuário
-        print("\n📋 Lista de clientes:")
-        for cliente in sorted(clientes, key=lambda c: c["nome"]):
-            print(f"ID: {cliente["id"]} - {cliente["nome"].title()} - CPF: {formatar_cpf(cliente["cpf"])}\n-----------------------------\n")
+        ClienteView.detalhar_clientes()
 
         # Pede o ID do cliente que o usuário deseja excluir
         id_excluir = input("\nDigite o ID do cliente que deseja excluir (Caso queira cancelar, deixe em branco):")
