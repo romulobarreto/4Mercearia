@@ -85,3 +85,35 @@ class ClienteController():
             lista_formatada += f"{index}°: {cliente["nome"].title()}\nCPF: {formatar_cpf(cliente["cpf"])}\nTelefone: {formatar_telefone(cliente["telefone"])}\nEndereço: {cliente["endereco"].title()}\n_______________________________\n"
 
         return True, lista_formatada
+    
+
+
+
+
+    @staticmethod
+    def excluir_cliente(id_excluir):
+        # Carrega a lista de clientes
+        clientes = ClienteDao.carregar_cliente()
+
+        # Verifica se o id informado está na lista clientes
+        dicionario_excluir = None
+
+        for cliente in clientes:
+            if cliente["id"] == id_excluir:
+                dicionario_excluir = cliente
+                break
+
+        if not dicionario_excluir:
+            return False, f"\n⚠️ O ID: {id_excluir} não está na lista de clientes."
+        
+        # Remove o dicionario selecionado da lista
+        clientes.remove(dicionario_excluir)
+
+        # Salva a nova lista
+        sucesso, mensagem = ClienteDao.salvar_cliente(clientes)
+
+        if sucesso:
+            return True, f"\n✅ Cliente excluído com sucesso.\nCliente: {dicionario_excluir["nome"].title()} - CPF: {formatar_cpf(dicionario_excluir["cpf"])}\n"
+        else:
+            return False, mensagem
+
