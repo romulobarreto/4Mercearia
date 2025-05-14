@@ -32,9 +32,7 @@ class CategoriaView:
             return 
         
         # Exibe lista de categorias cadastradas
-        print("\n📋 Lista de categorias:")
-        for categoria in sorted(categorias, key=lambda c: c["nome"]):
-            print(f"ID: {categoria["id"]} - {categoria["nome"].title()}")
+        CategoriaView.detalhar_categorias()
 
         # Solicita o ID da categoria que será excluída
         id_categoria = input("\nDigite o ID categoria que deseja excluir (Caso não queira excluir nenhuma, deixe em branco): ").strip()
@@ -68,9 +66,7 @@ class CategoriaView:
             return 
         
         # Exibe lista de categorias cadastradas
-        print("\n📋 Lista de categorias:")
-        for categoria in sorted(categorias, key=lambda c: c["nome"]):
-            print(f"ID: {categoria["id"]} - {categoria["nome"].title()}")
+        CategoriaView.detalhar_categorias()
 
         # Pega o input do usuário
         id_categoria = input("\nDigite o ID da categoria que deseja editar (Caso não queira editar nenhuma, deixe em branco): ").strip()

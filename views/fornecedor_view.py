@@ -32,9 +32,7 @@ class FornecedorView:
             return 
         
         # Mostra a lista de fornecedores ao usuário
-        print("\n📋 Lista de fornecedores:")
-        for fornecedor in sorted(fornecedores, key=lambda c: c["nome"]):
-            print(f"ID: {fornecedor["id"]} - {fornecedor["nome"].title()}")
+        FornecedorView.detalhar_fornecedores()
 
         # Pega o input do usuário do ID do fornecedor e valida
         id_fornecedor = input("\nDigite o ID do fornecedor que deseja excluir (Caso não queira excluir nenhum, deixe em branco): ").strip()
@@ -68,9 +66,7 @@ class FornecedorView:
             return
 
         # Exibe a lista de fornecedores cadastrados
-        print("\n📋 Lista de fornecedores:")
-        for fornecedor in sorted(fornecedores, key=lambda c: c["nome"]):
-            print(f"ID: {fornecedor["id"]} - {fornecedor["nome"].title()}")
+        FornecedorView.detalhar_fornecedores()
             
 
         # Pega o input do usuário do ID do usuário que deseja editar

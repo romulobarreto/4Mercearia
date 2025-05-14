@@ -48,8 +48,8 @@ class CategoriaController:
         
         # Detalhar categorias
         lista_formatada = "\n📋 Lista de categorias cadastradas:\n"
-        for index, categoria in enumerate(sorted(categorias, key=lambda c: c["nome"]), start=1):
-            lista_formatada += f"{index}°: {categoria["nome"].upper()}\n"
+        for categoria in sorted(categorias, key=lambda c: c["nome"]):
+            lista_formatada += f"ID {categoria["id"]}: {categoria["nome"].title()}\n"
         lista_formatada += "---------------------------"
 
         return True, lista_formatada

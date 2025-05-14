@@ -93,12 +93,12 @@ class ProdutoController():
         
         # Formata a lista de produtos e exibe
         lista_formatada = "\n📋 Lista de produtos cadastrados:\n"
-        for index, produto in enumerate(sorted(produtos, key=lambda c: c["nome"]), start=1):
+        for produto in sorted(produtos, key=lambda c: c["nome"]):
             categoria_nome = categorias_dict[produto["categoria_id"]]
             fornecedor_nome = fornecedores_dict[produto["fornecedor_id"]]
 
             lista_formatada += (
-                f"{index}°: {produto["nome"].title()}\n"
+                f"ID {produto["id"]}: {produto["nome"].title()}\n"
                 f"Preço: {formatar_preco(Decimal(produto["preco"]))}\n"
                 f"Quantidade em estoque: {produto["quantidade"]}\n"
                 f"Categoria: {categoria_nome.title()}\n"

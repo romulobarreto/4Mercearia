@@ -59,6 +59,9 @@ class FornecedorController:
         
 
 
+
+
+
     @staticmethod
     def detalhar_fornecedores():
         # Carregar fornecedores
@@ -70,12 +73,17 @@ class FornecedorController:
         
         # Detalhar Fornecedores
         lista_formatada = "\n📋 Lista de fornecedores cadastrados:\n"
-        for index, fornecedor in enumerate(sorted(fornecedores, key=lambda c: c["nome"]), start=1):
-            lista_formatada += f"{index}°: {fornecedor["nome"].title()} - Telefone: {formatar_telefone(fornecedor["telefone"])}\n"
+        for fornecedor in sorted(fornecedores, key=lambda c: c["nome"]):
+            lista_formatada += f"ID {fornecedor["id"]}: {fornecedor["nome"].title()} - Telefone: {formatar_telefone(fornecedor["telefone"])}\n"
         lista_formatada += "---------------------------"
 
         return True, lista_formatada
     
+
+
+
+
+
 
     
     @staticmethod

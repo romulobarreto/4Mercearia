@@ -97,12 +97,10 @@ class ProdutoView():
             return False, "\n⚠️ Não existem produtos para serem excluídos."
         
         # Chama e exibe a lista de produtos para o usuário ver as opções e escolher uma
-        print("\n📋 Lista de produtos:")
-        for produto in sorted(produtos, key=lambda c: c["nome"]):
-            print(f"ID: {produto["id"]} - {produto["nome"].title()}")
+        ProdutoView.detalhar_produtos()
 
         # Solicita ao usuário o ID do produto que ele deseja excluir
-        id_produto = input("\nDigite o ID do produto que deseja excluir (Caso não queira excluir nenhum, deixe em branco): ")
+        id_produto = input("\nDigite o ID do produto que deseja excluir (Caso não queira cancelar, deixe em branco): ")
 
         if not id_produto:
             print("✅ Nenhum produto foi excluído.")
@@ -144,12 +142,10 @@ class ProdutoView():
             return
         
         # Chama e exibe a lista de produtos para o usuário ver as opções e escolher uma
-        print("\n📋 Lista de produtos:")
-        for produto in sorted(produtos, key=lambda c: c["nome"]):
-            print(f"ID: {produto["id"]} - {produto["nome"].title()}")
+        ProdutoView.detalhar_produtos()
 
         # Solicita o ID do produto que será editado e valida
-        id_produto = input("\nDigite o ID do produto que deseja excluir (Caso não queira excluir nenhum, deixe em branco): ")
+        id_produto = input("\nDigite o ID do produto que deseja editar (Caso não queira cancelar, deixe em branco): ")
 
         if not id_produto:
             print("✅ Nenhum produto foi editado.")
