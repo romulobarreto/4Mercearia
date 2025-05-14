@@ -81,8 +81,8 @@ class ClienteController():
             return False, "\n⚠️ Nenhum cliente cadastrado para exibir, faça um cadastro."
         
         lista_formatada = "\n📋 Lista de clientes cadastrados:\n"
-        for index, cliente in enumerate(sorted(clientes, key=lambda c: c["nome"]), start=1):
-            lista_formatada += f"{index}°: {cliente["nome"].title()}\nCPF: {formatar_cpf(cliente["cpf"])}\nTelefone: {formatar_telefone(cliente["telefone"])}\nEndereço: {cliente["endereco"].title()}\n_______________________________\n"
+        for cliente in sorted(clientes, key=lambda c: c["nome"]):
+            lista_formatada += f"ID {cliente["id"]}: {cliente["nome"].title()}\nCPF: {formatar_cpf(cliente["cpf"])}\nTelefone: {formatar_telefone(cliente["telefone"])}\nEndereço: {cliente["endereco"].title()}\n_______________________________\n"
 
         return True, lista_formatada
     
