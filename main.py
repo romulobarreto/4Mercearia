@@ -110,8 +110,8 @@ def menu():
                     ClienteView.detalhar_clientes()
                 #elif opcao_cliente == "3":
                     #ProdutoView.editar_produto()
-                #elif opcao_cliente == "4":
-                    #ProdutoView.excluir_produto()
+                elif opcao_cliente == "4":
+                    ClienteView.excluir_cliente()    
                 elif opcao_cliente == "5":
                     break
                 else:
