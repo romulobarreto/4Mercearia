@@ -1,4 +1,5 @@
 from controllers.cliente_controller import *
+from utils.formatacao import formatar_cpf
 
 class ClienteView():
 
@@ -27,4 +28,39 @@ class ClienteView():
         # Chama a função de detalhar cliente do controller
         sucesso, mensagem = ClienteController.detalhar_clientes()
         # Exibe a lista caso haja
+        print(mensagem)
+
+
+
+
+    @staticmethod
+    def excluir_cliente():
+        # Carregar clientes
+        clientes = ClienteDao.carregar_cliente()
+
+        # Verifica se existe clientes cadastrados
+        if not clientes:
+            print("⚠️ Não existe nenhum cliente para excluir.")
+            return
+
+        # Exibe lista de clientes ao usuário
+        print("\n📋 Lista de clientes:")
+        for cliente in sorted(clientes, key=lambda c: c["nome"]):
+            print(f"ID: {cliente["id"]} - {cliente["nome"].title()} - CPF: {formatar_cpf(cliente["cpf"])}\n-----------------------------\n")
+
+        # Pede o ID do cliente que o usuário deseja excluir
+        id_excluir = input("\nDigite o ID do cliente que deseja excluir (Caso queira cancelar, deixe em branco):")
+
+        if not id_excluir:
+            print(f"\n✅ Nenhum cliente foi excluído.")
+            return
+        
+        try:
+            id_excluir = int(id_excluir)
+        except ValueError:
+            print("\n⚠️ O valor não está na formatação correta.")
+            return
+        
+        # Chama a função de exclusão do controller
+        sucesso, mensagem = ClienteController.excluir_cliente(id_excluir)
         print(mensagem)
