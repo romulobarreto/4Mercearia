@@ -12,13 +12,22 @@ class CategoriaView:
         sucesso, mensagem = CategoriaController.cadastrar_categoria(nome)
         print(mensagem)
 
+
+
+
+
     
     @staticmethod
-    def detalhar_categorias():
+    def detalhar_categorias(id=None):
         # Chama a função do controller para detalhar as categorias
-        sucesso, mensagem = CategoriaController.detalhar_categorias()
+        sucesso, mensagem = CategoriaController.detalhar_categorias(id)
         # Exibe resultado
         print(mensagem)
+
+
+
+
+
 
 
     @staticmethod
@@ -52,6 +61,10 @@ class CategoriaView:
 
         # Exibe o resultado da função
         print(mensagem)
+
+
+
+
 
 
 
@@ -94,13 +107,13 @@ class CategoriaView:
                 
         
         # Mostra os detalhes da categoria selecionada
-        print(f"\nDetalhes da categoria:\nID: {dicionario_categoria["id"]}\nNome: {dicionario_categoria["nome"].title()}")
+        CategoriaView.detalhar_categorias(id_categoria)
 
         # Input com o nome atualizado
         novo_nome = input('\nDigite o novo nome da categoria (ou pressione Enter para manter o mesmo): ').strip().lower()
 
         # Chama a função de editar a categoria
-        sucesso, mensagem = CategoriaController.editar_categoria(id_categoria, novo_nome)
+        sucesso, mensagem = CategoriaController.editar_categoria(id_categoria, novo_nome, dicionario_categoria)
 
         # Mostra a mensagem de sucesso
         print(mensagem)
