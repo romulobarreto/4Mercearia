@@ -12,13 +12,23 @@ class FornecedorView:
         sucesso, mensagem = FornecedorController.cadastrar_fornecedor(nome, telefone)
         print(mensagem)
 
+
+
+
+
+
     
     @staticmethod
-    def detalhar_fornecedores():
+    def detalhar_fornecedores(id=None):
         # Chama a função do controller para detalhar os fornecedores
-        sucesso, mensagem = FornecedorController.detalhar_fornecedores()
+        sucesso, mensagem = FornecedorController.detalhar_fornecedores(id)
         # Exibe resultado
         print(mensagem)
+
+
+
+
+
 
 
     @staticmethod
@@ -52,6 +62,10 @@ class FornecedorView:
 
         # Exibe o resultado da função
         print(mensagem)
+
+
+
+
 
 
 
@@ -94,7 +108,7 @@ class FornecedorView:
             return
         
         # Mostra os detalhes do fornecedor selecionado
-        print(f"\n📋 Detalhes do fornecedor:\nID: {lista_fornecedor["id"]}\nNome: {lista_fornecedor["nome"].title()}\nTelefone: {formatar_telefone(lista_fornecedor["telefone"])}")
+        FornecedorView.detalhar_fornecedores(id_fornecedor)
         
         # Solicita a chave ao usuário
         chave = input("\nEscolha a opção que deseja editar:\nNome\nTelefone\n").strip().lower()
