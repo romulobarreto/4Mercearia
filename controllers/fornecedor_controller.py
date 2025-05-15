@@ -28,6 +28,9 @@ class FornecedorController:
         
 
 
+
+
+
     
     @staticmethod
     def cadastrar_fornecedor(nome, telefone):
@@ -62,8 +65,9 @@ class FornecedorController:
 
 
 
+
     @staticmethod
-    def detalhar_fornecedores():
+    def detalhar_fornecedores(id=None):
         # Carregar fornecedores
         fornecedores = FornecedorDao.carregar_fornecedor()
 
@@ -72,10 +76,17 @@ class FornecedorController:
             return False, "\n⚠️ A lista de fornecedores está vazia!"
         
         # Detalhar Fornecedores
-        lista_formatada = "\n📋 Lista de fornecedores cadastrados:\n"
-        for fornecedor in sorted(fornecedores, key=lambda c: c["nome"]):
-            lista_formatada += f"ID {fornecedor["id"]}: {fornecedor["nome"].title()} - Telefone: {formatar_telefone(fornecedor["telefone"])}\n"
-        lista_formatada += "---------------------------"
+        if id:
+            lista_formatada = "\n📋 Detalhes do fornecedor:\n"
+            for fornecedor in fornecedores:
+                if fornecedor["id"] == id:
+                    lista_formatada += f"ID {fornecedor["id"]}: {fornecedor["nome"].title()} - Telefone: {formatar_telefone(fornecedor["telefone"])}\n---------------------------"
+                    break
+        else:    
+            lista_formatada = "\n📋 Lista de fornecedores cadastrados:\n"
+            for fornecedor in sorted(fornecedores, key=lambda c: c["nome"]):
+                lista_formatada += f"ID {fornecedor["id"]}: {fornecedor["nome"].title()} - Telefone: {formatar_telefone(fornecedor["telefone"])}\n"
+            lista_formatada += "---------------------------"
 
         return True, lista_formatada
     
@@ -115,6 +126,10 @@ class FornecedorController:
         FornecedorDao.salvar_fornecedor(fornecedores)
         return True, f"✅ O fornecedor {nome_fornecedor.title()} foi excluído com sucesso."
         
+
+
+
+
 
 
     @staticmethod
