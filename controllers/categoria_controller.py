@@ -4,9 +4,9 @@ from models.categoria import *
 from utils.buscas import buscar_nome_categoria
 
 class CategoriaController:
-    
+
     @staticmethod
-    def cadastrar_categoria(nome):
+    def validar_dados(nome, nome_atual=None):
         # Carrega a lista de categorias
         categorias = CategoriaDao.carregar_categoria()
 
@@ -14,9 +14,24 @@ class CategoriaController:
         if not nome:
             return False, "⚠️ O nome não pode estar vazio."
         
-        for categoria in categorias:
-            if categoria["nome"] == nome:
-                return False, f"\n⚠️ A categoria {nome} já está cadastrada."
+        if nome != nome_atual and any(categoria["nome"] == nome for categoria in categorias):
+            return False, "🚫 Categoria já cadastrada."
+        
+        return True, "✅ Dados aprovados."
+
+
+
+
+    
+    @staticmethod
+    def cadastrar_categoria(nome):
+        # Carrega a lista de categorias
+        categorias = CategoriaDao.carregar_categoria()
+
+        # Valida o valor de nome
+        sucesso, mensagem = CategoriaController.validar_dados(nome)
+        if not sucesso:
+            return False, mensagem
         
         # Define o valor do maior_id
         id = max([categoria["id"] for categoria in categorias], default=0) + 1
@@ -37,8 +52,11 @@ class CategoriaController:
         
 
 
+
+
+
     @staticmethod
-    def detalhar_categorias():
+    def detalhar_categorias(id=None):
         # Carregar categorias
         categorias = CategoriaDao.carregar_categoria()
 
@@ -47,13 +65,23 @@ class CategoriaController:
             return False, "\n⚠️ A lista de categorias está vazia!"
         
         # Detalhar categorias
-        lista_formatada = "\n📋 Lista de categorias cadastradas:\n"
-        for categoria in sorted(categorias, key=lambda c: c["nome"]):
-            lista_formatada += f"ID {categoria["id"]}: {categoria["nome"].title()}\n"
-        lista_formatada += "---------------------------"
+        if id:
+            lista_formatada = "\n📋 Detalhes da categoria:\n"
+            for categoria in categorias:
+                if categoria["id"] == id:
+                    lista_formatada += f"ID {categoria["id"]}: {categoria["nome"].title()}\n---------------------------"
+                    break
+        else:
+            lista_formatada = "\n📋 Lista de categorias cadastradas:\n"
+            for categoria in sorted(categorias, key=lambda c: c["nome"]):
+                lista_formatada += f"ID {categoria["id"]}: {categoria["nome"].title()}\n"
+            lista_formatada += "---------------------------"
 
         return True, lista_formatada
     
+
+
+
 
     
     @staticmethod
@@ -88,8 +116,12 @@ class CategoriaController:
         
 
 
+
+
+
+
     @staticmethod
-    def editar_categoria(id_categoria, novo_nome):
+    def editar_categoria(id_categoria, novo_nome, dicionario_categoria):
         # Carrega lista de usuários
         categorias = CategoriaDao.carregar_categoria()
 
@@ -100,9 +132,9 @@ class CategoriaController:
             return False, f"✅ A categoria {categoria_nome.title()} permanece a mesma."
         
         # Valida se o nome da categoria está cadastrado
-        for categoria in categorias:
-            if categoria["nome"] == novo_nome:
-                return False, f"⚠️ {novo_nome.title()} já está em uso."
+        sucesso, mensagem = CategoriaController.validar_dados(novo_nome, dicionario_categoria["nome"])
+        if not sucesso:
+            return False, mensagem
             
         # Encontra a lista que deve ser editado e faz a alteração
         for categoria in categorias:
