@@ -5,7 +5,12 @@ import re
 # Função para validar telefone com regex
 def validar_telefone(telefone):
     # Padrão regex
-    padrao_telefone = re.compile(r"^[A-Za-zÀ-ÿ]+(?: [A-Za-zÀ-ÿ]+)* \d+(?: [A-Za-zÀ-ÿ0-9\-]+)*$")
+    if len(telefone) == 10:
+        padrao_telefone = re.compile(r"^([1-9][0-9])([0-9]{8})$")
+    elif len(telefone) == 11:
+        padrao_telefone = re.compile(r"^([1-9][0-9])[9]([0-9]{8})$")
+    else:
+        padrao_telefone = re.compile(r"^([1-9][0-9])[1-9]([0-9]{7,8})$")
 
     validar_telefone = re.fullmatch(padrao_telefone, telefone)
 
