@@ -72,20 +72,33 @@ class ClienteController():
         
     
 
+
+
+
+
     @staticmethod
-    def detalhar_clientes():
+    def detalhar_clientes(id=None):
         # Carrega lista de clientes
         clientes = ClienteDao.carregar_cliente()
 
         if not clientes:
             return False, "\n⚠️ Nenhum cliente cadastrado para exibir, faça um cadastro."
         
-        lista_formatada = "\n📋 Lista de clientes cadastrados:\n"
-        for cliente in sorted(clientes, key=lambda c: c["nome"]):
-            lista_formatada += f"ID {cliente["id"]}: {cliente["nome"].title()}\nCPF: {formatar_cpf(cliente["cpf"])}\nTelefone: {formatar_telefone(cliente["telefone"])}\nEndereço: {cliente["endereco"].title()}\n_______________________________\n"
+        # Forma a lista que será exibida no terminal
+        if id:
+            lista_formatada = "\n📋 Detalhes do(a) cliente:\n"
+            for cliente in clientes:
+                if cliente["id"] == id:
+                    lista_formatada += f"ID {cliente["id"]}: {cliente["nome"].title()}\nCPF: {formatar_cpf(cliente["cpf"])}\nTelefone: {formatar_telefone(cliente["telefone"])}\nEndereço: {cliente["endereco"].title()}\---------------------------\n"
+        else:
+            lista_formatada = "\n📋 Lista de clientes cadastrados:\n"
+            for cliente in sorted(clientes, key=lambda c: c["nome"]):
+                lista_formatada += f"ID {cliente["id"]}: {cliente["nome"].title()}\nCPF: {formatar_cpf(cliente["cpf"])}\nTelefone: {formatar_telefone(cliente["telefone"])}\nEndereço: {cliente["endereco"].title()}\n---------------------------\n"
 
         return True, lista_formatada
     
+
+
 
 
 

@@ -76,9 +76,9 @@ class ProdutoView():
 
 
     @staticmethod
-    def detalhar_produtos():
+    def detalhar_produtos(id=None):
         # Chama a função de detalhar 
-        sucesso, mensagem = ProdutoController.detalhar_produtos()
+        sucesso, mensagem = ProdutoController.detalhar_produtos(id)
         # Exibe o resultado
         print(mensagem)
 
@@ -170,10 +170,7 @@ class ProdutoView():
             return
 
         # Exibe o produto escolhido de forma detalhada
-        categoria_nome = buscar_nome_categoria(lista_produto["categoria_id"], categorias)
-        fornecedor_nome = buscar_nome_fornecedor(lista_produto["fornecedor_id"], fornecedores)
-
-        print(f"\n📋 Detalhes do produto:\nID: {lista_produto["id"]} - {lista_produto["nome"].title()}\nPreço: {formatar_preco(float(lista_produto["preco"]))}\nQuantidade em estoque: {lista_produto["quantidade"]}\nCategoria: {categoria_nome.title()}\nFornecedor: {fornecedor_nome.title()}")
+        ProdutoView.detalhar_produtos(id_produto)
         
         # Solicita a chave ao usuário
         chave = input("\nDigite a chave que deseja alterar (Nome, Preço, Quantidade, Categoria, Fornecedor): ").strip().lower().replace("ç", "c").replace("categoria", "categoria_id").replace("fornecedor", "fornecedor_id")

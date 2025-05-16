@@ -76,8 +76,10 @@ class ProdutoController():
 
 
 
+
+
     @staticmethod
-    def detalhar_produtos():
+    def detalhar_produtos(id=None):
         # Carrega a lista de produtos, categorias e fornecedores
         produtos = ProdutoDao.carregar_produto()
         categorias = CategoriaDao.carregar_categoria()
@@ -92,22 +94,41 @@ class ProdutoController():
         fornecedores_dict = criar_dict_fornecedores(fornecedores)
         
         # Formata a lista de produtos e exibe
-        lista_formatada = "\n📋 Lista de produtos cadastrados:\n"
-        for produto in sorted(produtos, key=lambda c: c["nome"]):
-            categoria_nome = categorias_dict[produto["categoria_id"]]
-            fornecedor_nome = fornecedores_dict[produto["fornecedor_id"]]
+        if id:
+            lista_formatada = "\n📋 Detalhes do produto:\n"
+            for produto in produtos:
+                categoria_nome = categorias_dict[produto["categoria_id"]]
+                fornecedor_nome = fornecedores_dict[produto["fornecedor_id"]]
+                if produto["id"] == id:
+                    lista_formatada += (
+                    f"ID {produto["id"]}: {produto["nome"].title()}\n"
+                    f"Preço: {formatar_preco(Decimal(produto["preco"]))}\n"
+                    f"Quantidade em estoque: {produto["quantidade"]}\n"
+                    f"Categoria: {categoria_nome.title()}\n"
+                    f"Fornecedor: {fornecedor_nome.title()}\n"
+                    f"---------------------------\n"
+                    )   
+                    break
+        else:
+            lista_formatada = "\n📋 Lista de produtos cadastrados:\n"
+            for produto in sorted(produtos, key=lambda c: c["nome"]):
+                categoria_nome = categorias_dict[produto["categoria_id"]]
+                fornecedor_nome = fornecedores_dict[produto["fornecedor_id"]]
 
-            lista_formatada += (
-                f"ID {produto["id"]}: {produto["nome"].title()}\n"
-                f"Preço: {formatar_preco(Decimal(produto["preco"]))}\n"
-                f"Quantidade em estoque: {produto["quantidade"]}\n"
-                f"Categoria: {categoria_nome.title()}\n"
-                f"Fornecedor: {fornecedor_nome.title()}\n"
-                f"---------------------------\n"
-            )
+                lista_formatada += (
+                    f"ID {produto["id"]}: {produto["nome"].title()}\n"
+                    f"Preço: {formatar_preco(Decimal(produto["preco"]))}\n"
+                    f"Quantidade em estoque: {produto["quantidade"]}\n"
+                    f"Categoria: {categoria_nome.title()}\n"
+                    f"Fornecedor: {fornecedor_nome.title()}\n"
+                    f"---------------------------\n"
+                )
 
         return True, lista_formatada
     
+
+
+
 
 
 
@@ -138,6 +159,9 @@ class ProdutoController():
 
         return True, f"\n✅ {dicionario_produto["nome"].title()} foi removido com sucesso."
     
+
+
+
 
 
 

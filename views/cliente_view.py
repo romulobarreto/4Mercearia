@@ -23,12 +23,17 @@ class ClienteView():
 
 
 
+
+
     @staticmethod
-    def detalhar_clientes():
+    def detalhar_clientes(id=None):
         # Chama a função de detalhar cliente do controller
-        sucesso, mensagem = ClienteController.detalhar_clientes()
+        sucesso, mensagem = ClienteController.detalhar_clientes(id)
         # Exibe a lista caso haja
         print(mensagem)
+
+
+
 
 
 
