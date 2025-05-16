@@ -4,6 +4,7 @@ from models.fornecedor import *
 from utils.formatacao import *
 from utils.buscas import buscar_nome_fornecedor
 from utils.validacao import validar_telefone
+from utils.gerador import gerador_id
 
 class FornecedorController:
     @staticmethod
@@ -44,7 +45,7 @@ class FornecedorController:
         fornecedores = FornecedorDao.carregar_fornecedor()
         
         # Define o valor do maior_id
-        id = max([fornecedor["id"] for fornecedor in fornecedores], default=0) + 1
+        id = gerador_id(fornecedores)
 
         # Cria o fornecedor
         fornecedor = Fornecedor(id, nome, telefone)

@@ -5,6 +5,7 @@ from daos.categoria_dao import *
 from daos.fornecedor_dao import *
 from utils.formatacao import formatar_preco
 from utils.buscas import criar_dict_categorias, criar_dict_fornecedores
+from utils.gerador import gerador_id
 
 class ProdutoController():
     @staticmethod
@@ -58,7 +59,7 @@ class ProdutoController():
         fornecedores = FornecedorDao.carregar_fornecedor()
 
         # Define o valor do ID para produto
-        id = max([produto["id"] for produto in produtos], default=0) + 1
+        id = gerador_id(produtos)
 
         # Cria o produto
         produto = Produto(id, nome, preco, quantidade, categoria_id, fornecedor_id)

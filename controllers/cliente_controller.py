@@ -2,6 +2,7 @@ from models.cliente import *
 from daos.cliente_dao import *
 from utils.validacao import validar_cpf, validar_telefone, validar_endereco
 from utils.formatacao import formatar_telefone, formatar_cpf
+from utils.gerador import gerador_id
 
 class ClienteController():
 
@@ -54,7 +55,7 @@ class ClienteController():
         clientes = ClienteDao.carregar_cliente()
 
         # Cria o ID do cliente
-        id = max([cliente["id"] for cliente in clientes], default=0) + 1
+        id = gerador_id(clientes)
 
         # Cria o cliente
         cliente = Cliente(id, nome, cpf, telefone, endereco)

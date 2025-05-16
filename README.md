@@ -136,6 +136,7 @@ O sistema precisa gerar os seguintes relatórios:
 - `produto.py`: Classe Produto
 - `categoria.py`: Classe Categoria
 - `fornecedor.py`: Classe Fornecedor
+- `pessoa.py`: Classe Pessoa
 - `cliente.py`: Classe Cliente
 - `funcionario.py`: Classe Funcionario
 - `venda.py`: Classe Venda
@@ -167,6 +168,7 @@ O sistema precisa gerar os seguintes relatórios:
 - `venda_dao.py`: Acesso a dados de vendas
 
 ### 📂 Utils
+- `gerador.py`: Funções para geração de ID
 - `validacao.py`: Funções para validação de dados
 - `formatacao.py`: Funções para formatação de dados
 - `exportacao.py`: Funções para exportação de relatórios para Excel

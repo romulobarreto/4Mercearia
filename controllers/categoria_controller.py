@@ -2,6 +2,7 @@ from daos.categoria_dao import *
 from daos.produto_dao import *
 from models.categoria import *
 from utils.buscas import buscar_nome_categoria
+from utils.gerador import gerador_id
 
 class CategoriaController:
 
@@ -34,7 +35,7 @@ class CategoriaController:
             return False, mensagem
         
         # Define o valor do maior_id
-        id = max([categoria["id"] for categoria in categorias], default=0) + 1
+        id = gerador_id(categorias)
 
         # Cria a categoria
         categoria = Categoria(id, nome)
