@@ -32,7 +32,7 @@ def validar_cpf(cpf):
 # Função para validar o endereço (Garantir que tenha letras e números)
 def validar_endereco(endereco):
     # Padrão regex
-    padrao_endereco = re.compile(r"^[a-zA-Z]+(?: [A-Za-zÀ-ÿ]+)* \d+[A-Za-z0-9\-]*$")
+    padrao_endereco = re.compile(r"^[A-Za-zÀ-ÿ]+(?: [A-Za-zÀ-ÿ]+)* \d+(?: [A-Za-zÀ-ÿ0-9\-]+)*$")
 
     validar_endereco = re.fullmatch(padrao_endereco, endereco)
 
