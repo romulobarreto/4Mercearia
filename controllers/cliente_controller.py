@@ -120,6 +120,8 @@ class ClienteController():
         if not dicionario_excluir:
             return False, f"\n⚠️ O ID: {id_excluir} não está na lista de clientes."
         
+        #TODO Remove o cliente apenas se não estiver vinculado a nenhuma venda
+        
         # Remove o dicionario selecionado da lista
         clientes.remove(dicionario_excluir)
 
@@ -131,3 +133,34 @@ class ClienteController():
         else:
             return False, mensagem
 
+
+
+
+
+
+    @staticmethod
+    def editar_cliente(nome, cpf, telefone, endereco, dicionario_cliente):
+        sucesso, mensagem = ClienteController.validar_dados(nome, cpf, telefone, endereco, dicionario_cliente["cpf"])
+
+        if not sucesso:
+            return False, mensagem
+        
+        # Carrega a lista de clientes
+        clientes = ClienteDao.carregar_cliente()
+
+        # Atualiza os dados na lista
+        for cliente in clientes:
+            if cliente["id"] == dicionario_cliente["id"]:
+                cliente["nome"] = nome
+                cliente["cpf"] = cpf
+                cliente["telefone"] = telefone
+                cliente["endereco"] = endereco
+                break
+
+        # Salva as alterações no banco
+        sucesso, mensagem = ClienteDao.salvar_cliente(clientes)
+
+        if sucesso:
+            return True, "✅ Cliente editado com sucesso."
+        else:
+            return False, "⚠️ Erro ao salvar a alteração no banco de dados."
