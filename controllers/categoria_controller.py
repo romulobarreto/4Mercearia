@@ -1,7 +1,7 @@
 from daos.categoria_dao import *
 from daos.produto_dao import *
 from models.categoria import *
-from utils.buscas import buscar_nome_categoria
+from utils.buscas import buscar_nome
 from utils.gerador import gerador_id
 
 class CategoriaController:
@@ -103,7 +103,7 @@ class CategoriaController:
                 
         
         # Verifica se a categoria está em uso com algum produto, se estiver, não pode ser excluída
-        categoria_nome = buscar_nome_categoria(id_categoria, categorias)
+        categoria_nome = buscar_nome(id_categoria, categorias)
         for produto in produtos:
             if produto["categoria_id"] == id_categoria:
                 return False, f"\n⚠️ {categoria_nome.title()} não pode ser excluído pois está sendo usado por um produto."
@@ -126,7 +126,7 @@ class CategoriaController:
         # Carrega lista de usuários
         categorias = CategoriaDao.carregar_categoria()
 
-        categoria_nome = buscar_nome_categoria(id_categoria, categorias)
+        categoria_nome = buscar_nome(id_categoria, categorias)
 
         # Valida o nome da categoria
         if not novo_nome:

@@ -2,7 +2,7 @@ from daos.fornecedor_dao import *
 from daos.produto_dao import *
 from models.fornecedor import *
 from utils.formatacao import *
-from utils.buscas import buscar_nome_fornecedor
+from utils.buscas import buscar_nome
 from utils.validacao import validar_telefone
 from utils.gerador import gerador_id
 
@@ -115,7 +115,7 @@ class FornecedorController:
             return False, f"\n⚠️ O ID: {id_fornecedor} não está na lista de fornecedores."
         
         # Verifica se o fornecedor está em uso com algum produto, se estiver, não pode ser excluído
-        nome_fornecedor = buscar_nome_fornecedor(id_fornecedor, fornecedores)
+        nome_fornecedor = buscar_nome(id_fornecedor, fornecedores)
         for produto in produtos:
             if produto["fornecedor_id"] == id_fornecedor:
                 return False, f"\n⚠️ {nome_fornecedor.title()} não pode ser excluído pois está sendo usado por um produto."

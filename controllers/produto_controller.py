@@ -4,7 +4,7 @@ from daos.produto_dao import *
 from daos.categoria_dao import *
 from daos.fornecedor_dao import *
 from utils.formatacao import formatar_preco
-from utils.buscas import criar_dict_categorias, criar_dict_fornecedores
+from utils.buscas import criar_dict, criar_dict
 from utils.gerador import gerador_id
 
 class ProdutoController():
@@ -91,8 +91,8 @@ class ProdutoController():
             return False, "\n⚠️ A lista de produtos está vazia!"
         
         # Cria os dicionários de acesso rápido de categoria e fornecedor
-        categorias_dict = criar_dict_categorias(categorias)
-        fornecedores_dict = criar_dict_fornecedores(fornecedores)
+        categorias_dict = criar_dict(categorias)
+        fornecedores_dict = criar_dict(fornecedores)
         
         # Formata a lista de produtos e exibe
         if id:

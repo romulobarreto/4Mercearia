@@ -2,7 +2,7 @@ from decimal import Decimal, InvalidOperation
 from controllers.produto_controller import *
 from views.fornecedor_view import *
 from views.categoria_view import *
-from utils.buscas import buscar_nome_categoria, buscar_nome_fornecedor
+from utils.buscas import buscar_nome, buscar_nome
 from utils.formatacao import formatar_preco
 
 class ProdutoView():
@@ -181,7 +181,6 @@ class ProdutoView():
             return
 
         # Pede o input para atualizar a chave que o usuário escolheu
-
         # Caso queira mudar o nome
         if chave == "nome":
             nome = input('\nDigite o novo nome do produto (ou pressione Enter para manter o mesmo): ').strip().lower()
@@ -288,11 +287,11 @@ class ProdutoView():
                 return
             elif chave == "categoria_id":
                 print(mensagem)
-                print(f"{lista_produto["nome"].title()} teve a categoria atualizada:\nDe: {buscar_nome_categoria(lista_produto["categoria_id"], categorias).title()}\nPara: {buscar_nome_categoria(categoria_id, categorias).title()}")
+                print(f"{lista_produto["nome"].title()} teve a categoria atualizada:\nDe: {buscar_nome(lista_produto["categoria_id"], categorias).title()}\nPara: {buscar_nome(categoria_id, categorias).title()}")
                 return
             elif chave == "fornecedor_id":
                 print(mensagem)
-                print(f"{lista_produto["nome"].title()} teve o fornecedor atualizad:\nDe: {buscar_nome_fornecedor(lista_produto["fornecedor_id"], fornecedores).title()}\nPara: {buscar_nome_fornecedor(fornecedor_id, fornecedores).title()}")
+                print(f"{lista_produto["nome"].title()} teve o fornecedor atualizad:\nDe: {buscar_nome(lista_produto["fornecedor_id"], fornecedores).title()}\nPara: {buscar_nome(fornecedor_id, fornecedores).title()}")
                 return
         else:
             print(mensagem)

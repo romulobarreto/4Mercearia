@@ -1,5 +1,4 @@
 from controllers.categoria_controller import *
-from utils.buscas import criar_dict_categorias
 
 class CategoriaView:
 
