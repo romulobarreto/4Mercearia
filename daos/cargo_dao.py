@@ -16,7 +16,7 @@ class CargoDao:
         
     # Salva as alterações no arquivo, reescrevendo a base e retornando mensagem    
     @classmethod    
-    def salvar_categoria(cls, cargos):
+    def salvar_cargo(cls, cargos):
         try:
             with open(cls.caminho_arquivo, "w") as arq:
                 json.dump(cargos, arq, indent=4)
