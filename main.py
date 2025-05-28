@@ -3,6 +3,7 @@ from views.fornecedor_view import *
 from views.produto_view import *
 from views.cliente_view import *
 from views.cargo_view import *
+from views.funcionario_view import *
 
 def menu():
     # Exibe o menu no terminal
@@ -114,15 +115,16 @@ def menu():
 
                 opcao_funcionario = input("\nEscolha uma das opções: ").strip()
 
-                #if opcao_funcionario == "1":
-                    #ClienteView.cadastrar_cliente()
+                if opcao_funcionario == "1":
+                    FuncionarioView.cadastrar_funcionario()
                 #elif opcao_funcionario == "2":
-                    #ClienteView.detalhar_clientes()
+                    #ClienteView.detalhar_clientes() #TODO Criar a função de detalhar funcionários
                 #elif opcao_funcionario == "3":
-                    #ClienteView.editar_cliente()
+                    #ClienteView.editar_cliente() #TODO Criar a função de editar funcionário
                 #elif opcao_funcionario == "4":
-                    #ClienteView.excluir_cliente()
-                if opcao_funcionario == "5":
+                    #ClienteView.excluir_cliente() #TODO Criar a função de excluir funcionário
+                    
+                elif opcao_funcionario == "5":
                     while True:
                         print("\n📌 Menu de CARGO: ")
                         print("1️⃣ - Cadastrar Cargo")
@@ -144,7 +146,7 @@ def menu():
                         elif opcao_cargo == "5":
                             break
                         else:
-                            print("⚠️ Opção inválida! Tente novamente.\n")
+                            print("\n⚠️ Opção inválida! Tente novamente.")
 
                 elif opcao_funcionario == "6":
                     break
