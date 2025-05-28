@@ -44,7 +44,7 @@ class CargoController:
         cargos.append(cargo.salvar_dict())
 
         # Salva a lista de cargos no banco e exibe a mensagem
-        sucesso, mensagem = CargoDao.salvar_categoria(cargos)
+        sucesso, mensagem = CargoDao.salvar_cargo(cargos)
 
         if sucesso:
             return True, mensagem
@@ -113,7 +113,7 @@ class CargoController:
 
         # Salva a lista atualizada na base
         CargoDao.salvar_cargo(cargos)
-        return True, f"✅ O cargo {cargo_nome.title()} foi deletada com sucesso."
+        return True, f"✅ O cargo {cargo_nome.title()} foi deletado com sucesso."
         
 
 
