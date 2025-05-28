@@ -34,9 +34,7 @@ class ProdutoView():
             return
         
         # Mostra as categorias disponíveis para o usuário escolher uma
-        print("\n📋 Lista de categorias:")
-        for categoria in sorted(categorias, key=lambda c: c["nome"]):
-            print(f"{categoria["id"]}: {categoria["nome"].title()}")
+        CategoriaView.detalhar_categorias()
 
         categoria_id = input("\nDigite o ID da categoria (ou deixe vazio para interromper o cadastro): ").strip()
 
@@ -51,9 +49,7 @@ class ProdutoView():
             return
 
         # Mostra os fornecedores disponíveis para o usuário escolher um
-        print("\n📋 Lista de fornecedores:")
-        for fornecedor in sorted(fornecedores, key=lambda c: c["nome"]):
-            print(f"{fornecedor["id"]}: {fornecedor["nome"].title()}")
+        FornecedorView.detalhar_fornecedores()
 
         fornecedor_id = input("\nDigite o ID do fornecedor (ou deixe vazio para interromper o cadastro): ").strip()
 
@@ -295,8 +291,3 @@ class ProdutoView():
                 return
         else:
             print(mensagem)
-
-
-        
-                
-
