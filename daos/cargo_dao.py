@@ -7,7 +7,7 @@ class CargoDao:
     
     # Carrega a lista de categorias, caso não haja lista, traz uma lista vazia
     @classmethod
-    def carregar_cargo(cls):
+    def carregar_cargos(cls):
         try:
             with open(cls.caminho_arquivo, "r") as arq:
                 return json.load(arq)
