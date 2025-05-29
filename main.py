@@ -117,8 +117,8 @@ def menu():
 
                 if opcao_funcionario == "1":
                     FuncionarioView.cadastrar_funcionario()
-                #elif opcao_funcionario == "2":
-                    #ClienteView.detalhar_clientes() #TODO Criar a função de detalhar funcionários
+                elif opcao_funcionario == "2":
+                    FuncionarioView.detalhar_funcionarios()
                 #elif opcao_funcionario == "3":
                     #ClienteView.editar_cliente() #TODO Criar a função de editar funcionário
                 #elif opcao_funcionario == "4":
