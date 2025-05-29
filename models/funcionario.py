@@ -7,4 +7,4 @@ class Funcionario(Pessoa):
         self.salario = salario
 
     def salvar_dict(self):
-        return {"id": self.id, "nome": self.nome, "cpf": self.cpf, "telefone": self.telefone, "cargo": self.cargo_id, "salario": str(self.salario)}
+        return {"id": self.id, "nome": self.nome, "cpf": self.cpf, "telefone": self.telefone, "cargo_id": self.cargo_id, "salario": str(self.salario)}
