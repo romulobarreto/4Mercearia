@@ -40,3 +40,15 @@ class FuncionarioView():
         # Chama a função de cadastrar funcionário
         sucesso, mensagem = FuncionarioController.cadastrar_funcionario(nome, cpf, telefone, cargo_id, salario)
         print(mensagem)
+
+
+
+
+
+
+    @staticmethod
+    def detalhar_funcionarios(id=None):
+        # Chama a função de detalhar
+        sucesso, mensagem = FuncionarioController.detalhar_funcionarios(id)
+        # Exibe o resultado
+        print(mensagem)
