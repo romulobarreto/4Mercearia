@@ -5,6 +5,7 @@ from daos.funcionario_dao import *
 from utils.validacao import validar_cpf, validar_telefone
 from utils.formatacao import formatar_preco, formatar_telefone, formatar_cpf
 from utils.gerador import gerador_id
+from utils.buscas import criar_dict
 
 class FuncionarioController():
 
@@ -76,3 +77,54 @@ class FuncionarioController():
             return True, mensagem
         else:
             return False, mensagem
+        
+
+
+
+
+
+
+    @staticmethod
+    def detalhar_funcionarios(id=None):
+        # Carrega a lista de funcionários e de cargos
+        cargos = CargoDao.carregar_cargos()
+        funcionarios = FuncionarioDao.carregar_funcionario()
+
+        # Verifica se possui funcionário cadastrado
+        if not funcionarios:
+            return False, "\n⚠️ A lista de funcionários está vazia."
+        
+        # Cria o dicionário de acesso rápido de ID - Cargo
+        cargos_dict = criar_dict(cargos)
+
+        # Formata e exibe a lista de um único ID
+        if id:
+            lista_formatada = "\n📋 Detalhes do funcionário:\n"
+            for funcionario in funcionarios:
+                cargo_nome = cargos_dict[funcionario["cargo_id"]]
+                if funcionario["id"] == id:
+                    lista_formatada += (
+                        f"ID {funcionario["id"]}: {funcionario["nome"].title()}\n"
+                        f"CPF: {formatar_cpf(funcionario["cpf"])}\n"
+                        f"Telefone: {formatar_telefone(funcionario["telefone"])}\n"
+                        f"Cargo: {cargo_nome.title()}\n"
+                        f"Salário: {formatar_preco(Decimal(funcionario["salario"]))}\n"
+                        f"---------------------------\n"
+                    )
+                    break
+        # Formata e exibe a lista completa
+        else:
+            lista_formatada = "\n📋 Lista de funcionários cadastrados:\n"
+            for funcionario in sorted(funcionarios, key=lambda c: c["nome"]):
+                cargo_nome = cargos_dict[funcionario["cargo_id"]]
+                
+                lista_formatada += (
+                    f"ID {funcionario["id"]}: {funcionario["nome"].title()}\n"
+                    f"CPF: {formatar_cpf(funcionario["cpf"])}\n"
+                    f"Telefone: {formatar_telefone(funcionario["telefone"])}\n"
+                    f"Cargo: {cargo_nome.title()}\n"
+                    f"Salário: {formatar_preco(Decimal(funcionario["salario"]))}\n"
+                    f"---------------------------\n"
+                )
+        
+        return True, lista_formatada
