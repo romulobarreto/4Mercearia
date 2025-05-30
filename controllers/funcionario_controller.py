@@ -128,3 +128,34 @@ class FuncionarioController():
                 )
         
         return True, lista_formatada
+    
+
+
+
+
+
+    @staticmethod
+    def excluir_funcionário(id_funcionario):
+        # Carrega a lista de funcionários
+        funcionarios = FuncionarioDao.carregar_funcionario()
+
+        # Verifica se o ID informado está na base de cadastro
+        dicionario_funcionario = None
+        for funcionario in funcionarios:
+            if funcionario["id"] == id_funcionario:
+                dicionario_funcionario = funcionario
+                break
+
+        # Caso nenhum funcionário encontrado, finaliza a função
+        if not dicionario_funcionario:
+            return False, f"\n⚠️ O ID: {id_funcionario}, não está na lista de funcionários."
+        
+        #TODO Verificar se o funcionário realizou alguma venda, se sim, não permitir exclusão do mesmo. Criar funções e tabelas do caixa.
+
+        # Remove o funcionário escolhido da lista
+        funcionarios.remove(dicionario_funcionario)
+
+        # Salva a lista sem o funcionário
+        sucesso, mensagem = FuncionarioDao.salvar_funcionario(funcionarios)
+
+        return True, f"\n✅ {dicionario_funcionario["nome"].title()} foi removido com sucesso."
