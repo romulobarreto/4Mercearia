@@ -107,7 +107,7 @@ def menu():
             while True:
                 print("\n📌 Menu de FUNCIONÁRIO: ")
                 print("1️⃣ - Cadastrar Funcionário")
-                print("2️⃣ - Detalhar Funcionário")
+                print("2️⃣ - Detalhar Funcionários")
                 print("3️⃣ - Editar Funcionário")
                 print("4️⃣ - Excluir Funcionário")
                 print("5️⃣ - 🖥️ CARGO")
@@ -121,8 +121,8 @@ def menu():
                     FuncionarioView.detalhar_funcionarios()
                 #elif opcao_funcionario == "3":
                     #ClienteView.editar_cliente() #TODO Criar a função de editar funcionário
-                #elif opcao_funcionario == "4":
-                    #ClienteView.excluir_cliente() #TODO Criar a função de excluir funcionário
+                elif opcao_funcionario == "4":
+                    FuncionarioView.excluir_funcionario()
                     
                 elif opcao_funcionario == "5":
                     while True:
