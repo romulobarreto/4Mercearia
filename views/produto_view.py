@@ -90,13 +90,14 @@ class ProdutoView():
 
         # Se a lista estiver vazia, encerra a função
         if not produtos:
-            return False, "\n⚠️ Não existem produtos para serem excluídos."
+            print("\n⚠️ Não existem produtos para serem excluídos.")
+            return
         
         # Chama e exibe a lista de produtos para o usuário ver as opções e escolher uma
         ProdutoView.detalhar_produtos()
 
         # Solicita ao usuário o ID do produto que ele deseja excluir
-        id_produto = input("\nDigite o ID do produto que deseja excluir (Caso não queira cancelar, deixe em branco): ")
+        id_produto = input("\nDigite o ID do produto que deseja excluir (Caso queira cancelar, deixe em branco): ")
 
         if not id_produto:
             print("✅ Nenhum produto foi excluído.")
