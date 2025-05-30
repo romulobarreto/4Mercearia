@@ -52,3 +52,38 @@ class FuncionarioView():
         sucesso, mensagem = FuncionarioController.detalhar_funcionarios(id)
         # Exibe o resultado
         print(mensagem)
+
+
+
+
+
+
+    @staticmethod
+    def excluir_funcionario():
+        # Carrega a lista de funcionários
+        funcionarios = FuncionarioDao.carregar_funcionario()
+
+        if not funcionarios:
+            print("\n⚠️ Não existem funcionários para serem excluídos.")
+            return
+        
+        # Exibe a lista de funcionários cadastrados
+        FuncionarioView.detalhar_funcionarios()
+
+        # Solicita o ID do funcionário que será excluído
+        id_funcionario = input("\nDigite o ID do funcionário que deseja excluir (Caso queira cancelar, deixe em branco): ")
+
+        if not id_funcionario:
+            print("✅ Nenhum funcionário foi excluído.")
+            return
+
+        # Converte o ID para INT
+        try:
+            id_funcionario = int(id_funcionario)
+        except ValueError:
+            print("\n⚠️ O valor não está na formatação correta.")
+            return 
+        
+        # Chama a função para excluir o funcionário
+        sucesso, mensagem = FuncionarioController.excluir_funcionário(id_funcionario)
+        print(mensagem)
