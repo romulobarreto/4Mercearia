@@ -159,3 +159,40 @@ class FuncionarioController():
         sucesso, mensagem = FuncionarioDao.salvar_funcionario(funcionarios)
 
         return True, f"\n✅ {dicionario_funcionario["nome"].title()} foi removido com sucesso."
+    
+
+
+
+
+
+
+
+
+    @staticmethod
+    def editar_funcionario(nome, cpf, telefone, cargo_id, salario, lista_funcionario):
+        # Chama a validação de dados
+        sucesso, mensagem = FuncionarioController.validar_dados(nome, cpf, telefone, cargo_id, salario, lista_funcionario["cpf"])
+
+        if not sucesso:
+            return False, mensagem
+        
+        # Carrega a lista de funcionários
+        funcionarios = FuncionarioDao.carregar_funcionario()
+
+        # Atualiza a lista de funcionários
+        for funcionario in funcionarios:
+            if funcionario["id"] == lista_funcionario["id"]:
+                funcionario["nome"] = nome
+                funcionario["cpf"] = cpf
+                funcionario["telefone"] = telefone
+                funcionario["cargo_id"] = cargo_id
+                funcionario["salario"] = str(salario)
+                break
+        
+        # Salva as alterações no banco
+        sucesso, mensagem = FuncionarioDao.salvar_funcionario(funcionarios)
+
+        if sucesso:
+            return True, "✅ Funcionário editado com sucesso."
+        else:
+            return False, "⚠️ Erro ao salvar a alteração no banco de dados."
