@@ -131,7 +131,7 @@ class ClienteView():
             endereco = dicionario_cliente["endereco"]
 
         elif chave == "cpf":
-            cpf = input('\nDigite o novo CPF do cliente (ou pressione Enter para manter o mesmo): ').strip().lower()
+            cpf = input('\nDigite o novo CPF do cliente (ou pressione Enter para manter o mesmo): ').strip().replace(".","").replace("-","")
             if not cpf:
                 print(f"\n✅ O CPF do cliente {dicionario_cliente["nome"].title()} foi mantido.")
                 return
@@ -140,7 +140,8 @@ class ClienteView():
             endereco = dicionario_cliente["endereco"]
 
         elif chave == "telefone":
-            telefone = input('\nDigite o novo telefone do cliente (ou pressione Enter para manter o mesmo): ').strip().lower()
+            telefone = input('\nDigite o novo telefone do cliente (ou pressione Enter para manter o mesmo): ').strip().replace("(", "").replace(")", "").replace("-","").replace(" ","")
+            
             if not telefone:
                 print(f"\n✅ O teledone do cliente {dicionario_cliente["nome"].title()} foi mantido.")
                 return
