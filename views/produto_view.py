@@ -142,7 +142,7 @@ class ProdutoView():
         ProdutoView.detalhar_produtos()
 
         # Solicita o ID do produto que será editado e valida
-        id_produto = input("\nDigite o ID do produto que deseja editar (Caso não queira cancelar, deixe em branco): ")
+        id_produto = input("\nDigite o ID do produto que deseja editar (Caso queira cancelar, deixe em branco): ")
 
         if not id_produto:
             print("✅ Nenhum produto foi editado.")
@@ -193,6 +193,7 @@ class ProdutoView():
         # Caso queira mudar o preco
         elif chave == "preco":
             preco = input('\nDigite o novo preço do produto (ou pressione Enter para manter o mesmo): R$').strip().replace(".", "").replace(",", ".")
+
             if not preco:
                 print(f"\n✅ O produto: {lista_produto["nome"].title()} teve o preço mantido.")
                 return
@@ -225,11 +226,10 @@ class ProdutoView():
         # Caso queira alterar a categoria
         elif chave == "categoria_id":
         # Exibe lista de categorias cadastradas
-            print("\n📋 Lista de categorias:")
-            for categoria in sorted(categorias, key=lambda c: c["nome"]):
-                print(f"ID: {categoria["id"]} - {categoria["nome"].title()}")
+            CategoriaView.detalhar_categorias()
 
-            categoria_id = input(f"\nDigite o ID da nova categoria do produto: {lista_produto["nome"].title()} (ou pressione Enter para manter o mesmo): ").strip()
+            categoria_id = input(f"\nDigite o ID da nova categoria do produto (ou pressione Enter para manter o mesmo): ").strip()
+
             if not categoria_id:
                 print(f"\n✅ O produto: {lista_produto["nome"].title()} teve a categoria mantida.")
                 return
@@ -246,12 +246,10 @@ class ProdutoView():
         # Caso queira alterar o fornecedor
         elif chave == "fornecedor_id":
         # Exibe a lista de fornecedores cadastrados
-        
-            print("\n📋 Lista de fornecedores:")
-            for fornecedor in sorted(fornecedores, key=lambda c: c["nome"]):
-                print(f"ID: {fornecedor["id"]} - {fornecedor["nome"].title()}")
+            FornecedorView.detalhar_fornecedores()
 
-            fornecedor_id = input(f"\nDigite o ID do novo fornecedor do produto: {lista_produto["nome"].title()} (ou pressione Enter para manter o mesmo): ").strip()
+            fornecedor_id = input(f"\nDigite o ID do novo fornecedor do produto (ou pressione Enter para manter o mesmo): ").strip()
+
             if not fornecedor_id:
                 print(f"\n✅ O produto: {lista_produto["nome"].title()} teve o fornecedor mantido.")
                 return
@@ -288,7 +286,7 @@ class ProdutoView():
                 return
             elif chave == "fornecedor_id":
                 print(mensagem)
-                print(f"{lista_produto["nome"].title()} teve o fornecedor atualizad:\nDe: {buscar_nome(lista_produto["fornecedor_id"], fornecedores).title()}\nPara: {buscar_nome(fornecedor_id, fornecedores).title()}")
+                print(f"{lista_produto["nome"].title()} teve o fornecedor atualizado:\nDe: {buscar_nome(lista_produto["fornecedor_id"], fornecedores).title()}\nPara: {buscar_nome(fornecedor_id, fornecedores).title()}")
                 return
         else:
             print(mensagem)
