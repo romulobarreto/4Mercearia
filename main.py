@@ -120,7 +120,7 @@ def menu():
                 elif opcao_funcionario == "2":
                     FuncionarioView.detalhar_funcionarios()
                 #elif opcao_funcionario == "3":
-                    #ClienteView.editar_cliente() #TODO Criar a função de editar funcionário
+                    FuncionarioView.editar_funcionario()
                 elif opcao_funcionario == "4":
                     FuncionarioView.excluir_funcionario()
                     
