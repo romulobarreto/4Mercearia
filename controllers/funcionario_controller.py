@@ -36,7 +36,7 @@ class FuncionarioController():
         
         # Valida o cargo
         if not any(cargo["id"] == cargo_id for cargo in cargos):
-            return False, f"\n ⚠️ Não existe cargo cadastrado para o ID: {cargo_id}."
+            return False, f"\n⚠️ Não existe cargo cadastrado para o ID: {cargo_id}."
         
         # Valida o salário
         if salario <= Decimal("0"):
