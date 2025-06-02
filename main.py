@@ -119,7 +119,7 @@ def menu():
                     FuncionarioView.cadastrar_funcionario()
                 elif opcao_funcionario == "2":
                     FuncionarioView.detalhar_funcionarios()
-                #elif opcao_funcionario == "3":
+                elif opcao_funcionario == "3":
                     FuncionarioView.editar_funcionario()
                 elif opcao_funcionario == "4":
                     FuncionarioView.excluir_funcionario()
