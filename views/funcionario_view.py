@@ -199,11 +199,17 @@ class FuncionarioView():
             if not cargo_id:
                 print(f"\n✅ O cargo do funcionário {lista_funcionario["nome"].title()} foi mantido.")
                 return
-            else:
-                nome = lista_funcionario["nome"]
-                cpf = lista_funcionario["cpf"]
-                telefone = lista_funcionario["telefone"]
-                salario = Decimal(lista_funcionario["salario"])
+            
+            try:
+                cargo_id = int(cargo_id)
+            except ValueError:
+                print("\n⚠️ O valor não está na formatação correta.")
+                return
+            
+            nome = lista_funcionario["nome"]
+            cpf = lista_funcionario["cpf"]
+            telefone = lista_funcionario["telefone"]
+            salario = Decimal(lista_funcionario["salario"])
 
         # Caso queira mudar o salário
         elif chave == "salario":
@@ -245,7 +251,7 @@ class FuncionarioView():
                 return
             elif chave == "salario":
                 print(mensagem)
-                print(f"{lista_funcionario["nome"].title()} teve o salário atualizado:\nDe: {formatar_preco(float(lista_funcionario["salário"]))}\nPara: {formatar_preco(salario)}")
+                print(f"{lista_funcionario["nome"].title()} teve o salário atualizado:\nDe: {formatar_preco(float(lista_funcionario["salario"]))}\nPara: {formatar_preco(salario)}")
                 return
         else:
             print(mensagem)
