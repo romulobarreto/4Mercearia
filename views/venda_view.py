@@ -2,7 +2,8 @@ from daos.venda_dao import *
 from views.funcionario_view import *
 from views.cliente_view import *
 from views.produto_view import *
-from datetime import date
+from controllers.venda_controller import *
+
 
 class VendaView():
     @staticmethod
@@ -47,7 +48,7 @@ class VendaView():
                 print("\n⚠️ O valor não está na formatação correta.")
                 continue
 
-            itens.append({"produto": dicionario_produto["nome"], "quantidade": quantidade, "preco": dicionario_produto["preco"]})
+            itens.append({"produto_id": dicionario_produto["id"], "quantidade": quantidade, "preco": dicionario_produto["preco"]})
 
             while True:
                 decisao = input("\n📠 Registrar mais itens ao pedido (S/N)? ").strip().lower()
@@ -56,6 +57,48 @@ class VendaView():
                 elif decisao == "n":
                     return itens
             
+
+
+
+
+
+    @staticmethod
+    def editar_itens(itens):
+        # Carrega a lista de produtos
+        produtos = ProdutoDao.carregar_produto()
+
+        # Exibe a lista de itens no carrinho
+        sucesso, mensagem = VendaController.detalhar_itens(itens)
+        print(mensagem)
+
+        while True:
+            # Pede o ID do produto que será editado
+            try:
+                produto_id = int(input("\nDigite o ID do produto que deseja alterar: "))
+            except ValueError:
+                print("\n⚠️ O valor não está na formatação correta.")
+                continue
+
+            # Valida se id_produto faz parte da lista de produtos
+            dicionario_produto = None
+            for item in itens:
+                if item["id"] == produto_id:
+                    dicionario_produto = item
+                    break
+            
+            if not dicionario_produto:
+                print(f"\n⚠️ O ID: {produto_id}, não está no carrinho.")
+                continue
+
+            # Exibe os dados do item escolhido do carrinho
+            sucesso, mensagem = VendaController.detalhar_itens(itens, produto_id)
+            print(mensagem)
+
+            
+
+
+        
+
 
 
 
