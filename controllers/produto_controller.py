@@ -4,7 +4,7 @@ from daos.produto_dao import *
 from daos.categoria_dao import *
 from daos.fornecedor_dao import *
 from utils.formatacao import formatar_preco
-from utils.buscas import criar_dict, criar_dict
+from utils.buscas import criar_dict
 from utils.gerador import gerador_id
 
 class ProdutoController():
