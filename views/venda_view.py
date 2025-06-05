@@ -3,6 +3,7 @@ from views.funcionario_view import *
 from views.cliente_view import *
 from views.produto_view import *
 from controllers.venda_controller import *
+from utils.buscas import buscar_nome
 
 
 class VendaView():
@@ -82,7 +83,7 @@ class VendaView():
             # Valida se id_produto faz parte da lista de produtos
             dicionario_produto = None
             for item in itens:
-                if item["id"] == produto_id:
+                if item["produto_id"] == produto_id:
                     dicionario_produto = item
                     break
             
@@ -94,6 +95,41 @@ class VendaView():
             sucesso, mensagem = VendaController.detalhar_itens(itens, produto_id)
             print(mensagem)
 
+            # Exibe a quantidade disponível em estoque do produto escolhido
+            quantidade_estoque = None
+            print(f"\n🛒 Quantidade disponível em estoque do: {buscar_nome(produto_id, produtos).title()}")
+            for produto in produtos:
+                if produto["id"] == produto_id:
+                    quantidade_estoque = produto["quantidade"]
+                    print(f"Quantidade: {produto["quantidade"]}")
+                    break
+            
+            while True:
+                # Solicita a nova quantidade do produto
+                try:
+                    quantidade = int(input(f"\nDigite a nova quantidade que deseja vender (Digite 0 para excluir o produto da lista): "))
+                except ValueError:
+                    print("\n⚠️ O valor não está na formatação correta.")
+                    continue
+
+                if quantidade <= 0:
+                    itens.remove(dicionario_produto)
+                    break
+                elif quantidade > quantidade_estoque:
+                    print(f"\n⚠️ Temos apenas {quantidade_estoque} em estoque, ajuste o seu pedido.")
+                    continue
+                else:
+                    dicionario_produto["quantidade"] = quantidade
+                    print("\n✅ Quantidade atualizada com sucesso.")
+                    break
+                
+            # Verifica se o usuário quer editar mais alguma coisa ou encerrar
+            while True:
+                decisao = input("\n📠 Editar mais itens no pedido (S/N)? ").strip().lower()
+                if decisao == "s":
+                    break
+                elif decisao == "n":
+                    return itens
             
 
 
