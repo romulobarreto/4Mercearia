@@ -53,10 +53,8 @@ class ProdutoController():
         if not sucesso:
             return False, mensagem
         
-        # Carregar lista de produtos, categorias e fornecedores
+        # Carregar lista de produtos
         produtos = ProdutoDao.carregar_produto()
-        categorias = CategoriaDao.carregar_categoria()
-        fornecedores = FornecedorDao.carregar_fornecedor()
 
         # Define o valor do ID para produto
         id = gerador_id(produtos)
