@@ -4,6 +4,7 @@ from views.produto_view import *
 from views.cliente_view import *
 from views.cargo_view import *
 from views.funcionario_view import *
+from views.venda_view import *
 
 def menu():
     # Exibe o menu no terminal
@@ -181,6 +182,28 @@ def menu():
                     break
                 else:
                     print("⚠️ Opção inválida! Tente novamente.\n")
+
+
+
+
+        
+
+
+        elif opcao == "5":
+            while True:
+                print("\n🛒 Menu de CARRINHO: ")
+                print("1️⃣ - Cadastrar Pedido")
+                print("2️⃣ - Voltar")
+
+                opcao_venda = input("\nEscolha uma das opções: ").strip()
+
+                if opcao_venda == "1":
+                    VendaView.registrar_produtos()
+                elif opcao_venda == "2":
+                    break
+                else:
+                    print("⚠️ Opção inválida! Tente novamente.\n")
+
 
 
 
