@@ -8,12 +8,14 @@ from utils.buscas import buscar_nome
 
 class VendaView():
     @staticmethod
-    def adicionar_itens():
+    def adicionar_itens(itens=None):
         # Carrega a lista de produtos
         produtos = ProdutoDao.carregar_produto()
 
         # Adiciona produtos a lista de itens vendidos
-        itens = []
+        if itens is None:
+            itens = []
+
         while True:
             # Exibe a lista de produtos
             ProdutoView.detalhar_produtos()
@@ -52,11 +54,16 @@ class VendaView():
             itens.append({"produto_id": dicionario_produto["id"], "quantidade": quantidade, "preco": dicionario_produto["preco"]})
 
             while True:
-                decisao = input("\n📠 Registrar mais itens ao pedido (S/N)? ").strip().lower()
-                if decisao == "s":
+                decisao = input("\n🛒 Menu do carrinho:\n1️⃣- Editar pedido\n2️⃣- Adicionar produto\n3️⃣- Check-out").strip().lower()
+                if decisao == "1":
+                    itens = VendaView.editar_itens(itens)
+                elif decisao == "2":
                     break
-                elif decisao == "n":
+                elif decisao == "3":
+                    print("\n✅ Carrinho fechado com sucesso.")
                     return itens
+                else:
+                    print("\n⚠️ Opção inválida.")
             
 
 
@@ -124,12 +131,7 @@ class VendaView():
                     break
                 
             # Verifica se o usuário quer editar mais alguma coisa ou encerrar
-            while True:
-                decisao = input("\n📠 Editar mais itens no pedido (S/N)? ").strip().lower()
-                if decisao == "s":
-                    break
-                elif decisao == "n":
-                    return itens
+            return itens
             
 
 
@@ -187,5 +189,18 @@ class VendaView():
                 return
         else:
             cliente_id = None
+
+        # Chama a funcao de adicionar itens
+        itens = VendaView.adicionar_itens()
+
+        # Chama a função do controller para salvar a venda no banco
+        sucesso, mensagem = VendaController.cadastrar_venda(funcionario_id, cliente_id, itens)
+
+        if not sucesso:
+            print(mensagem)
+            return
+        else:
+            print(mensagem)
+            print("\n✅ Check-out realizado com sucesso.")
         
 
