@@ -1,6 +1,7 @@
 from decimal import Decimal
 from models.funcionario import *
 from daos.cargo_dao import *
+from daos.venda_dao import *
 from daos.funcionario_dao import *
 from utils.validacao import validar_cpf, validar_telefone
 from utils.formatacao import formatar_preco, formatar_telefone, formatar_cpf
@@ -136,8 +137,9 @@ class FuncionarioController():
 
     @staticmethod
     def excluir_funcionário(id_funcionario):
-        # Carrega a lista de funcionários
+        # Carrega a lista de funcionários e vendas
         funcionarios = FuncionarioDao.carregar_funcionario()
+        vendas = VendaDao.carregar_vendas()
 
         # Verifica se o ID informado está na base de cadastro
         dicionario_funcionario = None
@@ -150,7 +152,10 @@ class FuncionarioController():
         if not dicionario_funcionario:
             return False, f"\n⚠️ O ID: {id_funcionario}, não está na lista de funcionários."
         
-        #TODO Verificar se o funcionário realizou alguma venda, se sim, não permitir exclusão do mesmo. Criar funções e tabelas do caixa.
+        # Verificar se o funcionário realizou alguma venda, se sim, não permitir exclusão do mesmo.
+        for venda in vendas:
+            if venda["cliente_id"] == id_funcionario:
+                return False, f"\n⚠️ O ID: {id_funcionario} faz parte de uma venda, não pode ser excluído."
 
         # Remove o funcionário escolhido da lista
         funcionarios.remove(dicionario_funcionario)
