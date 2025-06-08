@@ -138,6 +138,7 @@ O sistema precisa gerar os seguintes relatórios:
 - `fornecedor.py`: Classe Fornecedor
 - `pessoa.py`: Classe Pessoa
 - `cliente.py`: Classe Cliente
+- `cargo.py`: Classe Cargo
 - `funcionario.py`: Classe Funcionario
 - `venda.py`: Classe Venda
 
@@ -146,6 +147,7 @@ O sistema precisa gerar os seguintes relatórios:
 - `categoria_view.py`: Interface para operações de categorias
 - `fornecedor_view.py`: Interface para operações de fornecedores
 - `cliente_view.py`: Interface para operações de clientes
+- `cargo_view.py`: Interface para operações de cargos
 - `funcionario_view.py`: Interface para operações de funcionários
 - `venda_view.py`: Interface para caixa e vendas
 - `relatorio_view.py`: Interface para geração de relatórios
@@ -155,6 +157,7 @@ O sistema precisa gerar os seguintes relatórios:
 - `categoria_controller.py`: Lógica para gerenciar categorias
 - `fornecedor_controller.py`: Lógica para gerenciar fornecedores
 - `cliente_controller.py`: Lógica para gerenciar clientes
+- `cargo_controller.py`: Lógica para gerenciar cargos
 - `funcionario_controller.py`: Lógica para gerenciar funcionários
 - `venda_controller.py`: Lógica para gerenciar vendas
 - `relatorio_controller.py`: Lógica para gerar relatórios
@@ -164,6 +167,7 @@ O sistema precisa gerar os seguintes relatórios:
 - `categoria_dao.py`: Acesso a dados de categorias
 - `fornecedor_dao.py`: Acesso a dados de fornecedores
 - `cliente_dao.py`: Acesso a dados de clientes
+- `cargo_dao.py`: Acesso a dados de cargos
 - `funcionario_dao.py`: Acesso a dados de funcionários
 - `venda_dao.py`: Acesso a dados de vendas
 
@@ -199,6 +203,7 @@ O sistema precisa gerar os seguintes relatórios:
 - **Bibliotecas**: 
   - `pandas`: Para manipulação de dados e exportação para Excel
   - `re`: Para validações usando expressões regulares
+  - `validate-docbr`: Para validações de CPFs
   - `datetime`: Para manipulação de datas
   - `json`: Para armazenamento e leitura de dados
 
@@ -216,5 +221,4 @@ O sistema precisa gerar os seguintes relatórios:
 ### 📊 Fluxo de Relatório
 1. Selecionar tipo de relatório
 2. Definir parâmetros (período, filtros)
-3. Visualizar no terminal
-4. Opcionalmente, exportar para Excel
+3. Exportar para Excel
