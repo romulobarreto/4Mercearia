@@ -9,4 +9,4 @@ class Venda():
 
     # Salvar em forma de dicionário
     def salvar_dict(self):
-        return {"id": self.id, "funcionario_id": self.funcionario_id, "cliente_id": self.cliente_id, "data": self.data, "itens": self.itens, "total": str(self.total)}
+        return {"id": self.id, "funcionario_id": self.funcionario_id, "cliente_id": self.cliente_id, "data": self.data.strftime('%Y-%m-%d'), "itens": self.itens, "total": str(self.total)}
