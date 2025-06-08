@@ -44,7 +44,7 @@ class VendaView():
             # Pede a quantidade que será vendida
             try:
                 quantidade = int(input("\nDigite a quantidade que será vendida: "))
-                if (quantidade - dicionario_produto["quantidade"]) < 0:
+                if quantidade > dicionario_produto["quantidade"]:
                     print(f"\n⚠️ Não temos a quantidade de: {quantidade} em estoque para vender.")
                     continue
             except ValueError:
@@ -53,14 +53,19 @@ class VendaView():
 
             itens.append({"produto_id": dicionario_produto["id"], "quantidade": quantidade, "preco": dicionario_produto["preco"]})
 
+            # Exibe a lista de itens no carrinho
+            sucesso, mensagem = VendaController.detalhar_itens(itens)
+            print(mensagem)
+
             while True:
-                decisao = input("\n🛒 Menu do carrinho:\n1️⃣- Editar pedido\n2️⃣- Adicionar produto\n3️⃣- Check-out").strip().lower()
+                print("\n🛒 Menu do carrinho:\n1️⃣ - Editar pedido\n2️⃣ - Adicionar produto\n3️⃣ - Check-out")
+                decisao = input("\nDigite a opção que deseja seguir: ").strip().lower()
                 if decisao == "1":
                     itens = VendaView.editar_itens(itens)
                 elif decisao == "2":
                     break
                 elif decisao == "3":
-                    print("\n✅ Carrinho fechado com sucesso.")
+                    print("\n💵 Aguardando pagamento...")
                     return itens
                 else:
                     print("\n⚠️ Opção inválida.")
@@ -121,13 +126,18 @@ class VendaView():
 
                 if quantidade <= 0:
                     itens.remove(dicionario_produto)
+                    print("\n✅ Quantidade atualizada com sucesso.\n")
+                    sucesso, mensagem = VendaController.detalhar_itens(itens)
+                    print(mensagem)
                     break
                 elif quantidade > quantidade_estoque:
                     print(f"\n⚠️ Temos apenas {quantidade_estoque} em estoque, ajuste o seu pedido.")
                     continue
                 else:
                     dicionario_produto["quantidade"] = quantidade
-                    print("\n✅ Quantidade atualizada com sucesso.")
+                    print("\n✅ Quantidade atualizada com sucesso.\n")
+                    sucesso, mensagem = VendaController.detalhar_itens(itens)
+                    print(mensagem)
                     break
                 
             # Verifica se o usuário quer editar mais alguma coisa ou encerrar
@@ -194,7 +204,7 @@ class VendaView():
         itens = VendaView.adicionar_itens()
 
         # Chama a função do controller para salvar a venda no banco
-        sucesso, mensagem = VendaController.cadastrar_venda(funcionario_id, cliente_id, itens)
+        sucesso, mensagem = VendaController.cadastrar_venda(funcionario_id, itens, cliente_id)
 
         if not sucesso:
             print(mensagem)
