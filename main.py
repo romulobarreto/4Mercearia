@@ -5,6 +5,8 @@ from views.cliente_view import *
 from views.cargo_view import *
 from views.funcionario_view import *
 from views.venda_view import *
+from views.relatorio_view import *
+
 
 def menu():
     # Exibe o menu no terminal
@@ -206,6 +208,50 @@ def menu():
 
 
 
+
+
+
+        elif opcao == "6":
+            while True:
+                print(f"\n📑 Menu de RELATÓRIOS:")
+                print("1️⃣ - Exportar Cargos")
+                print("2️⃣ - Exportar Categorias")
+                print("3️⃣ - Exportar Clientes")
+                print("4️⃣ - Exportar Fornecedores")
+                print("5️⃣ - Exportar Funcionários")
+                print("6️⃣ - Exportar Produtos")
+                print("7️⃣ - Exportar Vendas")
+                print("8️⃣ - Exportar Vendas Por Período")
+                print("9️⃣ - Exportar Produtos Mais Vendidos")
+                print("🔟 - Exportar Clientes Que Mais Compram")
+                print("1️⃣ 1️⃣ - Voltar")
+
+                opcao_exportacao = input("\nEscolha uma das opções: ").strip()
+
+                if opcao_exportacao == "1":
+                    RelatorioView.exportar_cargo()
+                elif opcao_exportacao == "2":
+                    RelatorioView.exportar_categoria()
+                elif opcao_exportacao == "3":
+                    RelatorioView.exportar_cliente()
+                elif opcao_exportacao == "4":
+                    RelatorioView.exportar_fornecedor()
+                elif opcao_exportacao == "5":
+                    RelatorioView.exportar_funcionario()
+                elif opcao_exportacao == "6":
+                    RelatorioView.exportar_produto()
+                elif opcao_exportacao == "7":
+                    RelatorioView.exportar_venda()
+                elif opcao_exportacao == "8":
+                    RelatorioView.exportar_venda_por_data()
+                elif opcao_exportacao == "9":
+                    RelatorioView.exportar_produto_mais_vendido()
+                elif opcao_exportacao == "10":
+                    RelatorioView.exportar_clientes_com_mais_compras()
+                elif opcao_exportacao == "11":
+                    break
+                else:
+                    print("⚠️ Opção inválida! Tente novamente.\n")
 
 
 
