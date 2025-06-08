@@ -3,6 +3,7 @@ from models.produto import *
 from daos.produto_dao import *
 from daos.categoria_dao import *
 from daos.fornecedor_dao import *
+from daos.venda_dao import *
 from utils.formatacao import formatar_preco
 from utils.buscas import criar_dict
 from utils.gerador import gerador_id
@@ -134,8 +135,9 @@ class ProdutoController():
 
     @staticmethod
     def excluir_produto(id_produto):
-        # Carrega a lista de produtos
+        # Carrega a lista de produtos e vendas
         produtos = ProdutoDao.carregar_produto()
+        vendas = VendaDao.carregar_vendas()
 
         # Verifica se o ID informado está na base de produtos
         dicionario_produto = None
@@ -148,7 +150,9 @@ class ProdutoController():
             return False, f"\n⚠️ {id_produto} não está na lista de produtos."            
             
         # Verifica se o produto escolhido faz parte de uma venda, se fizer, não permite a exclusão do produto
-        #TODO Criar a parte do caixa da mercearia e implementar a regra de negócio
+        for venda in vendas:
+            if venda["cliente_id"] == id_produto:
+                return False, f"\n⚠️ O ID: {id_produto} faz parte de uma venda, não pode ser excluído."
             
         # Pega o dicionário do produto escolhido e remove da lista da produtos
         produtos.remove(dicionario_produto)
