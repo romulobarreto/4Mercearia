@@ -1,5 +1,6 @@
 from models.cliente import *
 from daos.cliente_dao import *
+from daos.venda_dao import *
 from utils.validacao import validar_cpf, validar_telefone, validar_endereco
 from utils.formatacao import formatar_telefone, formatar_cpf
 from utils.gerador import gerador_id
@@ -90,7 +91,7 @@ class ClienteController():
             lista_formatada = "\n📋 Detalhes do(a) cliente:\n"
             for cliente in clientes:
                 if cliente["id"] == id:
-                    lista_formatada += f"ID {cliente["id"]}: {cliente["nome"].title()}\nCPF: {formatar_cpf(cliente["cpf"])}\nTelefone: {formatar_telefone(cliente["telefone"])}\nEndereço: {cliente["endereco"].title()}\---------------------------\n"
+                    lista_formatada += f"ID {cliente["id"]}: {cliente["nome"].title()}\nCPF: {formatar_cpf(cliente["cpf"])}\nTelefone: {formatar_telefone(cliente["telefone"])}\nEndereço: {cliente["endereco"].title()}\n---------------------------\n"
         else:
             lista_formatada = "\n📋 Lista de clientes cadastrados:\n"
             for cliente in sorted(clientes, key=lambda c: c["nome"]):
@@ -106,8 +107,9 @@ class ClienteController():
 
     @staticmethod
     def excluir_cliente(id_excluir):
-        # Carrega a lista de clientes
+        # Carrega a lista de clientes e vendas
         clientes = ClienteDao.carregar_cliente()
+        vendas = VendaDao.carregar_vendas()
 
         # Verifica se o id informado está na lista clientes
         dicionario_excluir = None
@@ -120,7 +122,10 @@ class ClienteController():
         if not dicionario_excluir:
             return False, f"\n⚠️ O ID: {id_excluir} não está na lista de clientes."
         
-        #TODO Remove o cliente apenas se não estiver vinculado a nenhuma venda
+        # Remove o cliente apenas se não estiver vinculado a nenhuma venda
+        for venda in vendas:
+            if venda["cliente_id"] == id_excluir:
+                return False, f"\n⚠️ O ID: {id_excluir} faz parte de uma venda, não pode ser excluído."
         
         # Remove o dicionario selecionado da lista
         clientes.remove(dicionario_excluir)
