@@ -71,6 +71,18 @@ Armazena informações dos clientes da mercearia.
 
 ---
 
+### 👨🏻‍💻 Cargo
+Armazena informações dos cargos dos funcionários da mercearia.
+
+- **Atributos:**
+  - `id`: Identificador único do cargo
+  - `nome`: Nome do cargo
+
+- **Regras de Negócio:**
+  - Não pode haver dois cargos com o mesmo nome.
+
+---
+
 ### 👨‍💼 Funcionário
 Armazena informações dos funcionários da mercearia.
 
