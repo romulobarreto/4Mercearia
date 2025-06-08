@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "nome": "dono"
+    },
+    {
+        "id": 2,
+        "nome": "gerente"
+    },
+    {
+        "id": 3,
+        "nome": "caixa"
+    },
+    {
+        "id": 4,
+        "nome": "estoquista"
+    },
+    {
+        "id": 5,
+        "nome": "repositor"
+    },
+    {
+        "id": 6,
+        "nome": "atendente"
+    }
+]

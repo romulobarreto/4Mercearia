@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "nome": "romulo barreto",
+        "cpf": "80787632040",
+        "telefone": "53991716438",
+        "cargo_id": 1,
+        "salario": "17000"
+    },
+    {
+        "id": 2,
+        "nome": "mariana silva",
+        "cpf": "24522841060",
+        "telefone": "53999887766",
+        "cargo_id": 2,
+        "salario": "5000"
+    },
+    {
+        "id": 3,
+        "nome": "joao pedro santos",
+        "cpf": "76450870005",
+        "telefone": "53988776655",
+        "cargo_id": 3,
+        "salario": "2200"
+    },
+    {
+        "id": 4,
+        "nome": "ana clara rocha",
+        "cpf": "30397529007",
+        "telefone": "53977665544",
+        "cargo_id": 4,
+        "salario": "2100"
+    },
+    {
+        "id": 5,
+        "nome": "lucas ferreira",
+        "cpf": "91812161098",
+        "telefone": "53966554433",
+        "cargo_id": 5,
+        "salario": "2000"
+    },
+    {
+        "id": 6,
+        "nome": "juliana mendes",
+        "cpf": "16793132050",
+        "telefone": "53955443322",
+        "cargo_id": 6,
+        "salario": "1900"
+    }
+]

@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "nome": "myllene espilma",
+        "cpf": "67412742000",
+        "telefone": "53991864654",
+        "endereco": "av bento goncalves 1932 bloco d ap201"
+    },
+    {
+        "id": 2,
+        "nome": "joão da silva",
+        "cpf": "03350520022",
+        "telefone": "53997048858",
+        "endereco": "rua general osorio 105 casa 2"
+    },
+    {
+        "id": 3,
+        "nome": "maria aparecida",
+        "cpf": "18796543006",
+        "telefone": "53991452233",
+        "endereco": "av rio branco 500 ap 304 bloco b"
+    },
+    {
+        "id": 4,
+        "nome": "carlos alberto",
+        "cpf": "30521078063",
+        "telefone": "53991234567",
+        "endereco": "rua das flores 88 casa"
+    },
+    {
+        "id": 5,
+        "nome": "ana paula souza",
+        "cpf": "21459863000",
+        "telefone": "53998765432",
+        "endereco": "rua tiradentes 420 ap 102 bloco a"
+    },
+    {
+        "id": 6,
+        "nome": "lucas fernandes",
+        "cpf": "42019854088",
+        "telefone": "53997654321",
+        "endereco": "av farrapos 2000 bloco c ap 301"
+    },
+    {
+        "id": 7,
+        "nome": "fernanda oliveira",
+        "cpf": "51296374015",
+        "telefone": "53999887766",
+        "endereco": "rua domingos de almeida 234 casa"
+    },
+    {
+        "id": 8,
+        "nome": "ricardo pereira",
+        "cpf": "33018796050",
+        "telefone": "53991112233",
+        "endereco": "av senador salgado filho 150 ap 305"
+    },
+    {
+        "id": 9,
+        "nome": "juliana santos",
+        "cpf": "08973042027",
+        "telefone": "53994455667",
+        "endereco": "rua benjamin constant 543 casa"
+    },
+    {
+        "id": 10,
+        "nome": "roberto mendes",
+        "cpf": "29041857039",
+        "telefone": "53993322110",
+        "endereco": "rua dos andradas 99 bloco a ap 101"
+    }
+]

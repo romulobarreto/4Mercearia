@@ -1,5 +1,4 @@
 venv
-database/
 views/__pycache__
 models/__pycache__
 daos/__pycache__

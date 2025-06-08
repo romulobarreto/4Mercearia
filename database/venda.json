@@ -1,0 +1,176 @@
+[
+    {
+        "id": 1,
+        "funcionario_id": 1,
+        "cliente_id": 1,
+        "data": "2025-06-07",
+        "itens": [
+            {
+                "produto_id": 3,
+                "quantidade": 3,
+                "preco": "6.70"
+            }
+        ],
+        "total": "20.10"
+    },
+    {
+        "id": 2,
+        "funcionario_id": 1,
+        "cliente_id": null,
+        "data": "2025-06-07",
+        "itens": [
+            {
+                "produto_id": 8,
+                "quantidade": 5,
+                "preco": "9.80"
+            }
+        ],
+        "total": "49.00"
+    },
+    {
+        "id": 3,
+        "funcionario_id": 1,
+        "cliente_id": null,
+        "data": "2025-06-07",
+        "itens": [
+            {
+                "produto_id": 11,
+                "quantidade": 4,
+                "preco": "2.00"
+            }
+        ],
+        "total": "8.00"
+    },
+    {
+        "id": 4,
+        "funcionario_id": 1,
+        "cliente_id": 8,
+        "data": "2025-06-07",
+        "itens": [
+            {
+                "produto_id": 12,
+                "quantidade": 7,
+                "preco": "12.00"
+            },
+            {
+                "produto_id": 13,
+                "quantidade": 2,
+                "preco": "22.00"
+            }
+        ],
+        "total": "128.00"
+    },
+    {
+        "id": 5,
+        "funcionario_id": 6,
+        "cliente_id": 6,
+        "data": "2025-06-07",
+        "itens": [
+            {
+                "produto_id": 6,
+                "quantidade": 3,
+                "preco": "4.20"
+            }
+        ],
+        "total": "12.60"
+    },
+    {
+        "id": 6,
+        "funcionario_id": 1,
+        "cliente_id": null,
+        "data": "2025-06-08",
+        "itens": [
+            {
+                "produto_id": 7,
+                "quantidade": 2,
+                "preco": "2.50"
+            }
+        ],
+        "total": "5.00"
+    },
+    {
+        "id": 7,
+        "funcionario_id": 1,
+        "cliente_id": null,
+        "data": "2025-06-08",
+        "itens": [
+            {
+                "produto_id": 3,
+                "quantidade": 6,
+                "preco": "6.70"
+            }
+        ],
+        "total": "40.20"
+    },
+    {
+        "id": 8,
+        "funcionario_id": 1,
+        "cliente_id": null,
+        "data": "2025-06-08",
+        "itens": [
+            {
+                "produto_id": 8,
+                "quantidade": 1,
+                "preco": "9.80"
+            },
+            {
+                "produto_id": 10,
+                "quantidade": 1,
+                "preco": "5.90"
+            }
+        ],
+        "total": "15.70"
+    },
+    {
+        "id": 9,
+        "funcionario_id": 1,
+        "cliente_id": 10,
+        "data": "2025-06-08",
+        "itens": [
+            {
+                "produto_id": 1,
+                "quantidade": 2,
+                "preco": "22.50"
+            },
+            {
+                "produto_id": 3,
+                "quantidade": 2,
+                "preco": "6.70"
+            }
+        ],
+        "total": "58.40"
+    },
+    {
+        "id": 10,
+        "funcionario_id": 1,
+        "cliente_id": 9,
+        "data": "2025-06-08",
+        "itens": [
+            {
+                "produto_id": 15,
+                "quantidade": 5,
+                "preco": "2.50"
+            },
+            {
+                "produto_id": 3,
+                "quantidade": 1,
+                "preco": "6.70"
+            }
+        ],
+        "total": "19.20"
+    },
+    {
+        "id": 11,
+        "funcionario_id": 1,
+        "cliente_id": 3,
+        "data": "2025-06-08",
+        "itens": [
+            {
+                "produto_id": 4,
+                "quantidade": 2,
+                "preco": "9.50"
+            }
+        ],
+        "total": "19.00"
+    }
+]

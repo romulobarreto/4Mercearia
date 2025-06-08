@@ -1,0 +1,122 @@
+[
+    {
+        "id": 1,
+        "nome": "arroz tipo 1 5kg",
+        "preco": "22.50",
+        "quantidade": 18,
+        "categoria_id": 4,
+        "fornecedor_id": 1
+    },
+    {
+        "id": 2,
+        "nome": "feijão preto 1kg",
+        "preco": "7.90",
+        "quantidade": 30,
+        "categoria_id": 4,
+        "fornecedor_id": 1
+    },
+    {
+        "id": 3,
+        "nome": "óleo de soja 900ml",
+        "preco": "6.70",
+        "quantidade": 16,
+        "categoria_id": 4,
+        "fornecedor_id": 1
+    },
+    {
+        "id": 4,
+        "nome": "coca-cola 2L",
+        "preco": "9.50",
+        "quantidade": 13,
+        "categoria_id": 3,
+        "fornecedor_id": 4
+    },
+    {
+        "id": 5,
+        "nome": "guaraná antártica 2L",
+        "preco": "8.80",
+        "quantidade": 15,
+        "categoria_id": 3,
+        "fornecedor_id": 4
+    },
+    {
+        "id": 6,
+        "nome": "leite integral 1L",
+        "preco": "4.20",
+        "quantidade": 37,
+        "categoria_id": 4,
+        "fornecedor_id": 3
+    },
+    {
+        "id": 7,
+        "nome": "iogurte natural 170g",
+        "preco": "2.50",
+        "quantidade": 33,
+        "categoria_id": 4,
+        "fornecedor_id": 3
+    },
+    {
+        "id": 8,
+        "nome": "sabão em pó 1kg",
+        "preco": "9.80",
+        "quantidade": 14,
+        "categoria_id": 1,
+        "fornecedor_id": 6
+    },
+    {
+        "id": 9,
+        "nome": "desinfetante 500ml",
+        "preco": "4.50",
+        "quantidade": 25,
+        "categoria_id": 1,
+        "fornecedor_id": 6
+    },
+    {
+        "id": 10,
+        "nome": "papel higiênico 4un",
+        "preco": "5.90",
+        "quantidade": 17,
+        "categoria_id": 2,
+        "fornecedor_id": 7
+    },
+    {
+        "id": 11,
+        "nome": "sabonete neutro",
+        "preco": "2.00",
+        "quantidade": 46,
+        "categoria_id": 2,
+        "fornecedor_id": 7
+    },
+    {
+        "id": 12,
+        "nome": "pão francês Kg",
+        "preco": "12.00",
+        "quantidade": 3,
+        "categoria_id": 4,
+        "fornecedor_id": 8
+    },
+    {
+        "id": 13,
+        "nome": "linguiça toscana 1kg",
+        "preco": "22.00",
+        "quantidade": 10,
+        "categoria_id": 4,
+        "fornecedor_id": 5
+    },
+    {
+        "id": 14,
+        "nome": "filé de frango congelado 1kg",
+        "preco": "18.50",
+        "quantidade": 15,
+        "categoria_id": 4,
+        "fornecedor_id": 9
+    },
+    {
+        "id": 15,
+        "nome": "hamburguer bovino 56g",
+        "preco": "2.50",
+        "quantidade": 55,
+        "categoria_id": 4,
+        "fornecedor_id": 9
+    }
+]

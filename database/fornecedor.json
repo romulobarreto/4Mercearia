@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "nome": "distribuidora de alimentos bom preço",
+        "telefone": "53991234567"
+    },
+    {
+        "id": 2,
+        "nome": "hortifruti da serra",
+        "telefone": "53992345678"
+    },
+    {
+        "id": 3,
+        "nome": "laticínios sul minas",
+        "telefone": "53993456789"
+    },
+    {
+        "id": 4,
+        "nome": "distribuidora de bebidas rio",
+        "telefone": "53994567890"
+    },
+    {
+        "id": 5,
+        "nome": "açougue são joão",
+        "telefone": "53995678901"
+    },
+    {
+        "id": 6,
+        "nome": "produtos de limpeza brilho",
+        "telefone": "53996789012"
+    },
+    {
+        "id": 7,
+        "nome": "higiene e perfumaria brasil",
+        "telefone": "53997890123"
+    },
+    {
+        "id": 8,
+        "nome": "panificadora pão nosso",
+        "telefone": "53998901234"
+    },
+    {
+        "id": 9,
+        "nome": "distribuidora congelados sul",
+        "telefone": "53999012345"
+    }
+]
