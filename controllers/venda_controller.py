@@ -29,12 +29,20 @@ class VendaController():
                     break
         else:
             lista_formatada = "\n🛒 Lista de produtos no carrinho:\n"
-            for item in sorted(itens, key=lambda c: c["produto_id"]):
+            lista_precos = []
+            for item in itens:
                 produto_nome = produtos_dict[item["produto_id"]]
                 lista_formatada += (
                     f"ID: {item["produto_id"]}; Nome: {produto_nome.title()};\n"
-                    f"Preço: {formatar_preco(Decimal(item["preco"]))}; Quantidade: {item["quantidade"]}"
+                    f"Preço: {formatar_preco(Decimal(item["preco"]))}; Quantidade: {item["quantidade"]}\n"
+                    f"----------------------------------\n"
                 )
+                lista_precos.append(item["quantidade"] * Decimal(item["preco"]))
+            total = sum(lista_precos)
+            lista_formatada += (
+                f"Valor Total: {formatar_preco(total)}\n"
+                f"----------------------------------"
+            )
         
         return True, lista_formatada
     
@@ -45,7 +53,7 @@ class VendaController():
 
 
     @staticmethod
-    def cadastrar_venda(funcionario_id, cliente_id, itens):
+    def cadastrar_venda(funcionario_id, itens, cliente_id=None):
         # Carrega a lista de vendas e produtos
         vendas = VendaDao.carregar_vendas()
         produtos = ProdutoDao.carregar_produto()
@@ -66,7 +74,7 @@ class VendaController():
         venda = Venda(id, funcionario_id, data, itens, total, cliente_id)
 
         # Adiciona a venda na lista de vendas e salva em JSON
-        vendas.append(venda.salvar_dict(venda))
+        vendas.append(venda.salvar_dict())
         sucesso, mensagem = VendaDao.salvar_vendas(vendas)
 
         if sucesso:
